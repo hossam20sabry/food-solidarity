@@ -1,0 +1,146 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #689154;
+}
+
+.bg-green{
+    background-color: #689154;
+}
+.background{
+    background-color: aqua;
+}
+.mainBackground{
+    position: relative;
+}
+.mainBackground img{
+    z-index: -1;
+}
+.box_shadow{
+    box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
+}
+.nav_item{
+    width: 157px;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    padding: 8px 25px;
+    margin: 2px 0;
+}
+.mainBackground .content{
+    z-index: 1;
+    position: absolute;
+    top: 20%;
+    left: 6.8;
+}
+.background3{
+    background-color: #be835b;
+    outline-color: #be835b;
+    color: white;
+    transition: .5s;
+}
+.pos{
+    position: relative;
+}
+.box-shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.ben-img-size{
+    width: 22rem;
+    height: 22rem;
+}
+.bg-size{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+.background3:hover{
+    background-color: #be835b;
+    color: white;
+    transform: scale(1.05);
+}
+.background4{
+    background-color: #7ea6b5;
+    outline-color: #7ea6b5;
+    color: white;
+    transition: .5s;
+}
+.background4:hover{
+    background-color: #7ea6b5;
+    color: white;
+    transform: scale(1.05);
+}
+.navbar-brand{
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #689154;
+    text-transform: uppercase;
+}
+.min-height{
+    min-height: 90vh;
+}
+.mainBackground .content h1{
+    font-size: 4rem;
+}
+.color-green{
+    color: #689154;
+}
+.radius{
+    border-radius: 5px;
+}
+.button1{
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.button2{
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid #7aa0ae;
+    color: #7aa0ae;
+}
+.button2:hover{
+    background-color: #7aa0ae;
+    color: white;
+    transition: .5s;
+}
+.btnColor{
+    background-color: #7aa0ae;
+    color: white;
+}
+.card-width{
+    width: 22rem;
+    height: 30rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .h1-text-responsive{
+        font-size: 2.9rem !important;
+    }
+    .text-responsive2{
+        font-size: 1.1rem !important;
+    }
+    .text-responsive{
+        font-size: .7rem !important;
+    }
+    .background-text-responsive{
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.185);
+        color: black; 
+        text-shadow: 1px  1px 1px #fff; 
+    }
+    .card-responsive{
+        width: 15rem;
+    }
+    .ben-img-size{
+        width: 15rem;
+        height: 15rem;
+    }
+    
+}
