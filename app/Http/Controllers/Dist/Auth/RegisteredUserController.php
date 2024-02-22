@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dist\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\AuthType;
 use App\Models\Dist;
+use App\Models\DistAuthType;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +24,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('dist.auth.register');
+        $authorTypes = DistAuthType::all();
+        return view('dist.auth.register', compact('authorTypes'));
     }
 
     /**
@@ -32,16 +35,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'dist_auth_type_id' => ['required'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Dist::class],
+            'phone' => ['required', 'string', 'max:255', 'unique:'.Dist::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $dist = Dist::create([
             'name' => $request->name,
+            'dist_auth_type_id' => $request->dist_auth_type_id,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 

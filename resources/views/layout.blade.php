@@ -26,10 +26,16 @@
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
 
                 <ul class="navbar-nav me-auto mb-2 mt-3">
+                    @if(Auth::guard('dist')->check())
                     <li class="nav-item">
-                        <a href="" class="nav-link text-capitalize">test</a>
+                        <a href="{{ route('dist.donations.index')}}" class="nav-link text-capitalize">Donations</a>
                     </li>
-                    
+                    @endif
+                    @if(Auth::guard('web')->check())
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-capitalize">Request</a>
+                    </li>
+                    @endif
                 </ul>
 
                 @if(Auth::guard('dist')->check())
@@ -64,7 +70,7 @@
                     @if(Auth::guard('dist')->check())
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a></li>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('dist.logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">log out</button>
                         </form>

@@ -15,6 +15,8 @@ class Dist extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'dist_auth_type_id',
         'password',
     ];
 
@@ -37,4 +39,14 @@ class Dist extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
+
+    public function authType()
+    {
+        return $this->belongsTo(DistAuthType::class);
+    }
 }

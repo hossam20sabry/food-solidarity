@@ -20,8 +20,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">           
-                <a href="{{ route('admin.index') }}" class="nav-link text-capitalize">Admins</a>            
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">       
+                <a href="{{ route('admin.index') }}" class="nav-link text-capitalize border-start">Admins</a>            
+                <a href="{{ route('admin.authTypes.index') }}" class="nav-link text-capitalize border-start">Ben Authors</a>         
+                <a href="{{ route('admin.distAuthTypes.index') }}" class="nav-link text-capitalize border-start">Dist Authors</a>         
+                <a href="{{ route('admin.donationTypes.index') }}" class="nav-link text-capitalize border-start">Donations</a>            
+                <a href="{{ route('admin.dryFoodTypes.index') }}" class="nav-link text-capitalize border-start">Dry Foods </a>            
+                <a href="{{ route('admin.awarenessArticles.index') }}" class="nav-link text-capitalize border-start">Awarness Articles</a>            
             </ul>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-capitalize nav_item text-center box_shadow" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,5 +56,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>
+
+    @yield('script')
 </body>
 </html>
