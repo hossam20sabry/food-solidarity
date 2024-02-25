@@ -64,8 +64,8 @@
                             @csrf
                             <input type="hidden" name="type_id" id="type_id" value="3">
                             <input type="hidden" name="donation_id" id="donation_id"  value="{{$donation->id}}">
-                            <h5 class="card-title">Cooked Food</h5>
-                            <p class="card-text">If you want to donate cooked food..</p>
+                            <h5 class="card-title">Proteins</h5>
+                            <p class="card-text">Like Meat or Fish...</p>
                             <button type="submit" class="btn btn-success">Click here</button>
                         </form>
                     </div>
@@ -91,6 +91,7 @@
                 </div>
             </div>
 
+            
             <div class="col-md-6 p-2">
                 <div class="row d-flex justify-content-center">
                     <h5 class="text-center">Selected Dry Food</h5>
@@ -207,125 +208,6 @@
         }, 500);
     }
 
-
-
-    $(document).ready(function() {
-
-        //choose Donation type
-        // $('#dry').on('submit', function(e) {
-
-        //     e.preventDefault();
-        //     $('#mainSpinner').removeClass('d-none');
-        //     var alert = document.getElementById('alert');
-        //     var formData = $(this).serialize();
-            
-        //     $.ajax({
-        //         url: "{{route('dist.donations.donationType')}}",
-        //         type: 'POST',
-        //         data: {
-        //             _token: "{{ csrf_token() }}",
-        //             type_id: $('#type_id').val(),
-        //             donation_id: $('#donation_id').val(),
-        //         },
-        //         success: function(data) {
-        //             if(data.status == 200){
-        //                 $('#mainSpinner').addClass('d-none');
-
-        //                 //running phase 1
-        //                 if(data.type == 1){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase2').addClass('d-none');
-        //                     $('#phase3').addClass('d-none');
-
-        //                     $('#phase1').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //                 //running phase 2
-        //                 if(data.type == 2){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase1').addClass('d-none');
-        //                     $('#phase3').addClass('d-none');
-                            
-        //                     $('#phase2').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //                 //running phase 3
-        //                 if(data.type == 3){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase1').addClass('d-none');
-        //                     $('#phase2').addClass('d-none');
-                            
-        //                     $('#phase3').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //             }else{
-        //                 alert.classList.remove('d-none');
-        //                 alert.querySelector('p').textContent = 'Something went wrong';
-        //             }
-        //         }
-        //     })
-        // });
-
-        // $('#cooked').on('submit', function(e) {
-
-        //     e.preventDefault();
-        //     $('#mainSpinner').removeClass('d-none');
-        //     var alert = document.getElementById('alert');
-
-        //     $.ajax({
-        //         url: "{{route('dist.donations.donationType')}}",
-        //         type: 'POST',
-        //         data: {
-        //             _token: "{{ csrf_token() }}",
-        //             type_id2: $('#type_id2').val(),
-        //             donation_id2: $('#donation_id2').val(),
-        //         },
-        //         success: function(data) {
-        //             if(data.status == 200){
-        //                 $('#mainSpinner').addClass('d-none');
-
-        //                 //running phase 1
-        //                 if(data.type == 1){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase2').addClass('d-none');
-        //                     $('#phase3').addClass('d-none');
-
-        //                     $('#phase1').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //                 //running phase 2
-        //                 if(data.type == 2){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase1').addClass('d-none');
-        //                     $('#phase3').addClass('d-none');
-                            
-        //                     $('#phase2').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //                 //running phase 3
-        //                 if(data.type == 3){
-        //                     $('#choose').addClass('d-none');
-        //                     $('#phase1').addClass('d-none');
-        //                     $('#phase2').addClass('d-none');
-                            
-        //                     $('#phase3').removeClass('d-none');
-        //                     scrollTo(10000, 10000);
-        //                 }
-
-        //             }else{
-        //                 alert.classList.remove('d-none');
-        //                 alert.querySelector('p').textContent = 'Something went wrong';
-        //             }
-        //         }
-        //     })
-        // });
-
-    });
 
 </script>
 @endSection

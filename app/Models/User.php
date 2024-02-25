@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(AuthType::class);
     }
+
+    public function needs()
+    {
+        return $this->hasMany(Need::class);
+    }
 }

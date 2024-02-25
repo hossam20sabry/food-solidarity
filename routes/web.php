@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ben\HomeController as BenHomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SelectAuthController;
@@ -23,10 +24,17 @@ Route::middleware('guest:admin,dist,web')->group(function () {
     Route::get('select-Auth-register', [SelectAuthController::class, 'register'])->name('select.register');
 });
 
-Route::middleware('auth',)->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile/{guard}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('needs')->name('needs.')->group(function () {
+        Route::get('/', [BenHomeController::class, 'index'])->name('index');
+        Route::get('/create', [BenHomeController::class, 'create'])->name('create');
+        Route::post('/store', [BenHomeController::class, 'store'])->name('store');
+        Route::get('/{need}', [BenHomeController::class, 'show'])->name('show');    
+    });
 
 });
 
