@@ -18,7 +18,6 @@ return new class extends Migration
             $table->bigInteger('quantity');
             $table->enum('status', ['confirmed', 'matched'])->default('confirmed');
             $table->timestamps();
-
             $table->foreign('dist_id')->references('id')->on('dists')->onDelete('cascade');
             $table->foreign('donation_type_id')->references('id')->on('donation_types')->onDelete('cascade');
         });

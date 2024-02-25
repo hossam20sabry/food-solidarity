@@ -11,6 +11,6 @@ class DryFoodType extends Model
 
     public function dryFood()
     {
-        return $this->belongsToMany(DryFood::class, 'dry_food_dry_food_type', 'dry_food_type_id', 'dry_food_id');
+        return $this->belongsToMany(DryFood::class, 'dry_food_dry_food_types', 'dry_food_type_id', 'dry_food_id');
     }
 }

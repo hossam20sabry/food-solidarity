@@ -100,7 +100,7 @@
 
     @yield('content')
 
-    <footer class="mt-5 p-2 bg-body-tertiary text-center">
+    <footer class="p-2 bg-body-tertiary text-center">
         <p class="mb-0">© 2024 Food Solidarity. All rights reserved.</p>
     </footer>
     

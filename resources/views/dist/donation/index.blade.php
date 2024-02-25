@@ -33,41 +33,41 @@
 
     <div class="container mt-3">
         
-        {{-- @if(isset($types) && $types->count() > 0) --}}
+        @if(isset($donations) && $donations->count() > 0)
+        <h4 class="text-green border-bottom p-1">Donations List</h4>
         <table class="table table-secondary">
             <thead>
                 <tr>
-                    <th class="table_responsive">id</th>
-                    <th>name</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>id</th>
+                    <th>Type</th>
+                    <th class="table_responsive">Quantity</th>
+                    <th class="table_responsive">Status</th>
+                    <th class="table_responsive">Added At</th>
+                    <th>Show</th>
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($types as $type)
+                @foreach ($donations as $donation)
+                @if($donation->status == 'confirmed')
                 <tr>
-                    <th class="table_responsive">{{$type->id}}</th>
-                    <td>{{$type->name}}</td>
+                    <th>{{$donation->id}}</th>
+                    <td>@if($donation->donation_type == 1) Dry Food @elseif($donation->donation_type == 2) Cooked Food @endif</td>
+                    <td class="table_responsive">{{$donation->quantity}}</td>
+                    <td class="table_responsive">{{$donation->status}}</td>
+                    <td class="table_responsive">{{$donation->created_at}}</td>
                     <td>
-                        <a href="{{ route('admin.authTypes.edit', $type->id)}}">
-                            <button class="btn btn-primary">Edit</button>
+                        <a href="{{ route('admin.authTypes.edit', $donation->id)}}">
+                            <button class="btn btn-primary">Details</button>
                         </a>
                     </td>
-                    <td>
-                        <form action="{{ route('admin.authTypes.destroy', $type->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-
                 </tr>
-                @endforeach --}}
+                @endif
+                @endforeach
             </tbody>
         </table>
-        {{-- @else
-        <h3 class="text-center">No Author Types</h3>
-        @endif --}}
+        @else
+        <h3 class="text-center">No Donations Added</h3>
+        @endif
     </div>
 </div>
 @endsection

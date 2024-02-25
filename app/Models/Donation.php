@@ -19,12 +19,12 @@ class Donation extends Model
         return $this->belongsTo(DonationType::class);
     }
 
-    public function dryFood()
+    public function dryFoods()
     {
         return $this->hasOne(DryFood::class);
     }
 
-    public function coockedMeal()
+    public function coockedMeals()
     {
         return $this->hasOne(CoockedMeal::class);
     }

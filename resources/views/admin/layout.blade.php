@@ -24,7 +24,6 @@
                 <a href="{{ route('admin.index') }}" class="nav-link text-capitalize border-start">Admins</a>            
                 <a href="{{ route('admin.authTypes.index') }}" class="nav-link text-capitalize border-start">Ben Authors</a>         
                 <a href="{{ route('admin.distAuthTypes.index') }}" class="nav-link text-capitalize border-start">Dist Authors</a>         
-                <a href="{{ route('admin.donationTypes.index') }}" class="nav-link text-capitalize border-start">Donations</a>            
                 <a href="{{ route('admin.dryFoodTypes.index') }}" class="nav-link text-capitalize border-start">Dry Foods </a>            
                 <a href="{{ route('admin.awarenessArticles.index') }}" class="nav-link text-capitalize border-start">Awarness Articles</a>            
             </ul>

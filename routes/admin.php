@@ -47,13 +47,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/{authType}', [DistAuthTypesController::class, 'destroy'])->name('destroy');
         });
 
-        Route::prefix('donationTypes')->name('donationTypes.')->group(function () {
-            Route::get('/', [DonationTypesController::class, 'index'])->name('index');
-            Route::post('/', [DonationTypesController::class, 'store'])->name('store');
-            Route::get('/{donationType}/edit', [DonationTypesController::class, 'edit'])->name('edit');
-            Route::patch('/{donationType}', [DonationTypesController::class, 'update'])->name('update');
-            Route::delete('/{donationType}', [DonationTypesController::class, 'destroy'])->name('destroy');
-        });
 
         Route::prefix('dryFoodTypes')->name('dryFoodTypes.')->group(function () {
             Route::get('/', [DryFoodTypesController::class, 'index'])->name('index');

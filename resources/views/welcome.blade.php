@@ -62,6 +62,7 @@
         </table>
     </div>
 
+    @if(isset($article))
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">                        
@@ -107,5 +108,5 @@
         </div> --}}
         
     </div>
-
+    @endif
 @endsection

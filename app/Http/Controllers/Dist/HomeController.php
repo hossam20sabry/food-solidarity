@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dist;
 
 use App\Http\Controllers\Controller;
+use App\Models\CookedMeal;
 use App\Models\Donation;
 use App\Models\DonationType;
 use App\Models\DryFood;
 use App\Models\DryFoodType;
+use App\Models\Protein;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,15 +16,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->guard('dist')->user();
-        $donations = $user->donations;
-        return view('dist.donation.index', compact('donations'));
-    }
+        $donations = $user->donations->reverse();
 
-    public function create()
-    {
-        $donationType = DonationType::all();
-        $dryFoods = DryFoodType::all();
-        return view('dist.donation.create', compact('donationType', 'dryFoods'));
+        return view('dist.donation.index', compact('donations'));
     }
 
     public function store(Request $request)
@@ -34,54 +30,117 @@ class HomeController extends Controller
         $donation->quantity = 0;
         $donation->save();
 
-        return redirect()->route('dist.donations.create', compact('donation'));
+        return redirect()->route('dist.donations.choose', $donation->id);
     }
 
-    public function donationType(Request $request)
+    public function choose($id)
     {
-        $donationType = DonationType::find($request->type_id);
+        $donation = Donation::find($id);
+        $dryFoods = DryFoodType::all();
+        return view('dist.donation.choose', compact( 'dryFoods', 'donation'));
+    }
+
+    public function donationType(Request $request){   
         $donation = Donation::find($request->donation_id);
-        $donation->donation_type_id = $donationType->id;
+
+        $donation->donation_type = $request->type_id;
+        $donation->save();
+
+        return redirect()->route('dist.donations.create1', $donation->id);
+    }
+
+    public function create1($id){
+
+        $donation = Donation::find($id);
+
+        if($donation->donation_type == 1){
+            $dryFoods = DryFoodType::all();
+            return view('dist.donation.create1', compact( 'dryFoods', 'donation'));
+        }
+        elseif($donation->donation_type == 2){
+            $cookedMeals = CookedMeal::all();
+            return view('dist.donation.create2', compact('cookedMeals', 'donation'));
+        }elseif($donation->donation_type == 3){
+            $proteins = Protein::all();
+            return view('dist.donation.create3', compact('proteins', 'donation'));
+        }
+
+        return redirect()->route('dist.donations.index')->with('error', 'Invalid donation type');
+
+    }
+
+    public function dry(Request $request){
+        $request->validate([
+            'dry_food_id' => 'required|array',
+            'quantity' => 'required|array',
+            'expDate' => 'required|array',
+            'dry_food_id.*' => 'required',
+            'quantity.*' => 'required|numeric|min:1',
+            'expDate.*' => 'required|date',
+        ]);
+
+        $donation = Donation::find($request->donation_id);
+
+        $dryFoods = $request->input('dry_food_id');
+        $quantities = $request->input('quantity');
+        $expDates = $request->input('expDate');
+
+        if ($dryFoods !== null && $quantities !== null && $expDates !== null && count($dryFoods) === count($quantities) && count($dryFoods) === count($expDates)) {
+            $count = count($dryFoods);
+            for ($i = 0; $i < $count; $i++) {
+                $dryFoodId = $dryFoods[$i];
+                $quantity = $quantities[$i];
+                $expDate = $expDates[$i];
+        
+                $dryFoodType = DryFoodType::find($dryFoodId);
+        
+                if ($dryFoodType) {
+                    $newDryFood = new DryFood();
+                    $newDryFood->name = $dryFoodType->name;
+                    $newDryFood->donation_id = $donation->id;
+                    $newDryFood->save();
+
+                    $newDryFood->dryFoodTypes()->attach($dryFoodId, ['quantity' => $quantity, 'epiration_date' => $expDate]);
+                }
+                else{
+                    return redirect()->route('dist.donations.index')->with('error', 'Something went wrong.');
+                }
+            }
+        } else {
+            return redirect()->route('dist.donations.index')->with('error', 'Something went wrong.');
+        }
+
+        $qty = 0;
+        foreach ($quantities as $key => $quantitie) {
+            $qty = $qty + $quantitie;
+        }
+
+        $donation->quantity = $qty;
+        $donation->status = 'confirmed';
+        $donation->save();
+        return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
+                
+    }
+
+    public function cooked(Request $request){
+        $request->validate([
+            'quantity' => 'required',
+            'cooked_time' => 'required',
+        ]);
+
+        $donation = Donation::find($request->donation_id);
+
+        $cookedMeal = new CookedMeal();
+        $cookedMeal->donation_id = $donation->id;
+        $cookedMeal->quantity = $request->quantity;
+        $cookedMeal->cooked_time = $request->cooked_time;
+        $cookedMeal->save();
+
+        $donation->quantity = $request->quantity;
+        $donation->status = 'confirmed';
         $donation->save();
         
-        if($donation)
-        {
-            if($donation->donation_type_id == 7){
-                return response()->json([
-                    'status' => 200,
-                    'type' => 7
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 200,
-                    'type' => 8
-                ]);
-                
-            }
-        }else{
-            return response()->json([
-                'status' => 400,
-            ]);
-        }
-    }
+        return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 
-    public function dryFood(Request $request){
-        $request->validate([
-            'dryFoods' => 'required|array',
-            'quantities' => 'required|array',
-            'quantities.*' => 'required|integer|min:1',
-        ]);
-    
-        // Get the selected dry food types and their quantities from the request
-        $dryFoods = $request->input('dryFoods');
-        $quantities = $request->input('quantities');
-    
-        // Get the authenticated distributor
-        $dist = auth()->guard('dist')->user();
-    
-        // Attach the selected dry food types to the distributor with quantities
-        $dist->dryFoods->attach($dryFoods, function ($pivotData) use ($quantities) {
-            $pivotData->quantity = $quantities[$pivotData->dry_food_type_id];
-        });
     }
 }
