@@ -35,7 +35,7 @@
         
         @if(isset($donations) && $donations->count() > 0)
         <h4 class="text-green border-bottom p-1">Donations List</h4>
-        <table class="table table-secondary">
+        <table class="table table-light table-striped">
             <thead>
                 <tr>
                     <th>id</th>
@@ -51,12 +51,12 @@
                 @if($donation->status == 'confirmed')
                 <tr>
                     <th>{{$donation->id}}</th>
-                    <td>@if($donation->donation_type == 1) Dry Food @elseif($donation->donation_type == 2) Cooked Food @endif</td>
+                    <td>@if($donation->donation_type == 1) Dry @elseif($donation->donation_type == 2) Cooked Meals @elseif($donation->donation_type == 3) Proteins @endif</td>
                     <td class="table_responsive">{{$donation->quantity}}</td>
-                    <td class="table_responsive">{{$donation->status}}</td>
+                    <td class="table_responsive text-uppercase text-primary">{{$donation->status}}</td>
                     <td class="table_responsive">{{$donation->created_at}}</td>
                     <td>
-                        <a href="{{ route('admin.authTypes.edit', $donation->id)}}">
+                        <a href="{{ route('dist.donations.show', $donation->id)}}">
                             <button class="btn btn-primary">Details</button>
                         </a>
                     </td>

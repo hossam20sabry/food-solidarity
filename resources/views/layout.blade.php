@@ -33,7 +33,7 @@
                     @endif
                     @if(Auth::guard('web')->check())
                     <li class="nav-item">
-                        <a href="" class="nav-link text-capitalize">Request</a>
+                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Requests</a>
                     </li>
                     @endif
                 </ul>

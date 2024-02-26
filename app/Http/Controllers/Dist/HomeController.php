@@ -9,6 +9,7 @@ use App\Models\DonationType;
 use App\Models\DryFood;
 use App\Models\DryFoodType;
 use App\Models\Protein;
+use App\Models\ProteinType;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -61,7 +62,7 @@ class HomeController extends Controller
             $cookedMeals = CookedMeal::all();
             return view('dist.donation.create2', compact('cookedMeals', 'donation'));
         }elseif($donation->donation_type == 3){
-            $proteins = Protein::all();
+            $proteins = ProteinType::all();
             return view('dist.donation.create3', compact('proteins', 'donation'));
         }
 
@@ -142,5 +143,65 @@ class HomeController extends Controller
         
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 
+    }
+
+    public function proteins(Request $request){
+        $request->validate([
+            'protein_id' => 'required|array',
+            'quantity' => 'required|array',
+            'expDate' => 'required|array',
+            'protein_id.*' => 'required',
+            'quantity.*' => 'required|numeric|min:1',
+            'expDate.*' => 'required|date',
+        ]);
+
+        $donation = Donation::find($request->donation_id);
+
+        $proteins = $request->input('protein_id');
+        $quantities = $request->input('quantity');
+        $expDates = $request->input('expDate');
+
+        if ($proteins !== null && $quantities !== null && $expDates !== null && count($proteins) === count($quantities) && count($proteins) === count($expDates)) {
+            $count = count($proteins);
+            for ($i = 0; $i < $count; $i++) {
+                $proteinsId = $proteins[$i];
+                $quantity = $quantities[$i];
+                $expDate = $expDates[$i];
+
+                $proteinType = ProteinType::find($proteinsId);
+        
+                if ($proteinType) {
+                    $newProtein = new Protein();
+                    $newProtein->name = $proteinType->name;
+                    $newProtein->donation_id = $donation->id;
+                    $newProtein->save();
+
+                    $newProtein->proteinTypes()->attach($proteinsId, ['qty' => $quantity, 'exp' => $expDate]);
+                }
+                else{
+                    return redirect()->route('dist.donations.index')->with('error', 'Something went wrong.');
+                }
+            }
+        } else {
+            return redirect()->route('dist.donations.index')->with('error', 'Something went wrong.');
+        }
+
+        $qty = 0;
+        foreach ($quantities as $key => $quantitie) {
+            $qty = $qty + $quantitie;
+        }
+
+        $donation->quantity = $qty;
+        $donation->status = 'confirmed';
+        $donation->save();
+
+        return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
+
+    }
+
+    public function show($id)
+    {
+        $donation = Donation::find($id);
+        return view('dist.donation.show', compact('donation'));
     }
 }

@@ -26,6 +26,7 @@
                 <a href="{{ route('admin.distAuthTypes.index') }}" class="nav-link text-capitalize border-start">Dist Authors</a>         
                 <a href="{{ route('admin.dryFoodTypes.index') }}" class="nav-link text-capitalize border-start">Dry Foods </a>            
                 <a href="{{ route('admin.awarenessArticles.index') }}" class="nav-link text-capitalize border-start">Awarness Articles</a>            
+                <a href="{{ route('admin.proteinTypes.index') }}" class="nav-link text-capitalize border-start">Proteins</a>            
             </ul>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-capitalize nav_item text-center box_shadow" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

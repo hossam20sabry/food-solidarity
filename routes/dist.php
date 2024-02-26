@@ -25,14 +25,12 @@ Route::prefix('dist')->name('dist.')->group(function () {
         Route::prefix('donations')->name('donations.')->group(function () {
             Route::get('/', [DistHomeController::class, 'index'])->name('index');
             Route::get('/choose/{donation}', [DistHomeController::class, 'choose'])->name('choose');
-            Route::get('/create1/{donation}', [DistHomeController::class, 'create1'])->name('create1');
+            Route::get('/create/{donation}', [DistHomeController::class, 'create1'])->name('create1');
             Route::post('/store', [DistHomeController::class, 'store'])->name('store');
             Route::post('/dry', [DistHomeController::class, 'dry'])->name('dry');
             Route::post('/cooked', [DistHomeController::class, 'cooked'])->name('cooked');
-            // Route::get('/{donation}', [DistHomeController::class, 'show'])->name('show');
-            // Route::get('/{donation}/edit', [DistHomeController::class, 'edit'])->name('edit');
-            // Route::patch('/{donation}', [DistHomeController::class, 'update'])->name('update');
-            // Route::delete('/{donation}', [DistHomeController::class, 'destroy'])->name('destroy');
+            Route::post('/proteins', [DistHomeController::class, 'proteins'])->name('proteins');
+            Route::get('/{donation}', [DistHomeController::class, 'show'])->name('show');
 
             Route::post('/donation-type', [DistHomeController::class, 'donationType'])->name('donationType');
             Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');

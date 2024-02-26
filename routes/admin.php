@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthType\DistAuthTypesController;
 use App\Http\Controllers\Admin\AwarenessArticle\AwarenessArticlesController;
 use App\Http\Controllers\Admin\DonationType\DonationTypesController;
 use App\Http\Controllers\Admin\DryFoodType\DryFoodTypesController;
+use App\Http\Controllers\Admin\ProteinTypes\ProteinTypesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{dryFoodType}/edit', [DryFoodTypesController::class, 'edit'])->name('edit');
             Route::patch('/{dryFoodType}', [DryFoodTypesController::class, 'update'])->name('update');
             Route::delete('/{dryFoodType}', [DryFoodTypesController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('proteinTypes')->name('proteinTypes.')->group(function () {
+            Route::get('/', [ProteinTypesController::class, 'index'])->name('index');
+            Route::post('/store', [ProteinTypesController::class, 'store'])->name('store');
+            Route::get('/{proteinType}/edit', [ProteinTypesController::class, 'edit'])->name('edit');
+            Route::patch('/{proteinType}', [ProteinTypesController::class, 'update'])->name('update');
+            Route::delete('/{proteinType}', [ProteinTypesController::class, 'destroy'])->name('destroy');
         });
 
         Route::prefix('awarenessArticles')->name('awarenessArticles.')->group(function () {
