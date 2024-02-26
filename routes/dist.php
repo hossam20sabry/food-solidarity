@@ -32,9 +32,9 @@ Route::prefix('dist')->name('dist.')->group(function () {
             Route::post('/proteins', [DistHomeController::class, 'proteins'])->name('proteins');
             Route::get('/{donation}', [DistHomeController::class, 'show'])->name('show');
 
-            // Route::post('/donation-type', [DistHomeController::class, 'donationType'])->name('donationType');
-            // Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');
-            // Route::post('/dry-food', [DistHomeController::class, 'dryFood'])->name('dryFood');
+            Route::post('/donation-type', [DistHomeController::class, 'donationType'])->name('donationType');
+            Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');
+            Route::post('/dry-food', [DistHomeController::class, 'dryFood'])->name('dryFood');
         });
     });
 

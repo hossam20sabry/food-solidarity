@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+
 Route::middleware('guest:admin,dist,web')->group(function () {
     Route::get('select-Auth-login', [SelectAuthController::class, 'login'])->name('select.login');
     Route::get('select-Auth-register', [SelectAuthController::class, 'register'])->name('select.register');
