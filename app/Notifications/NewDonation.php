@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class FoodSolidariry extends Notification
+class NewDonation extends Notification
 {
     use Queueable;
 
@@ -15,7 +15,6 @@ class FoodSolidariry extends Notification
      * Create a new notification instance.
      */
     private $details;
-    
     public function __construct($details)
     {
         $this->details = $details;
@@ -28,7 +27,7 @@ class FoodSolidariry extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database', 'broadcast'];
     }
 
     /**
@@ -37,11 +36,9 @@ class FoodSolidariry extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->greeting($this->details['greeting'])
-                    ->line($this->details['firstline'])
-                    ->line($this->details['secondtline'])
-                    ->action($this->details['button'], $this->details['url'])
-                    ->line($this->details['lastline']);
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

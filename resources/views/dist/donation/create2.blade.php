@@ -13,12 +13,12 @@
         </div>
 </div>
 @endif
+
 <div class="container">
     <div class="row min-height d-flex flex-column justify-content-center align-items-center" style="position: relative;">
         
         <div class="row d-flex justify-content-center align-items-center box_shadow pos add-donation-height w-100">
             <div class="col-md-6">
-
                 <form action="{{ route('dist.donations.cooked') }}" method="post">
                     @csrf
                     <input type="hidden" name="donation_id" id="donation_id"  value="{{$donation->id}}">
@@ -42,6 +42,7 @@
                 </form>
             </div>
         </div>
+
 
         <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size">
     </div>
