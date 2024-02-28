@@ -118,6 +118,20 @@
 
         
     </nav>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
     
 
     @yield('content')
@@ -136,6 +150,19 @@
 
     @yield('script')
 
-    <script src="{{asset('/home/js/notify.js')}}"></script>
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toastElement = document.querySelector('.toast');
+            const toast = new bootstrap.Toast(toastElement);
+            console.log(toast);
+            toast.show();
+        });
+    </script> --}}
+
+    <script>
+        const id = "{{ Auth::id() }}";
+    </script>
+
+    <script src="{{asset('/home/js/app.js')}}"></script>
 </body>
 </html>

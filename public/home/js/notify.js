@@ -1,15 +1,5 @@
-var box  = document.getElementById('box');
-var down = false;
+const toastContent = document.querySelectorAll('.toast');
 
-
-function toggleNotifi(){
-	if (down) {
-		box.style.height  = '0px';
-		box.style.opacity = 0;
-		down = false;
-	}else {
-		box.style.height  = '510px';
-		box.style.opacity = 1;
-		down = true;
-	}
-}
+const toast = new bootstrap.Toast(toastContent);
+console.log(toast);
+toast.show();

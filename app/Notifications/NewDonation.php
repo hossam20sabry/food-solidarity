@@ -28,7 +28,7 @@ class NewDonation extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -43,6 +43,16 @@ class NewDonation extends Notification
     }
 
     public function toDatabase($notifiable){
+        return [
+            'greeting' => $this->details['greeting'],
+            'head' => $this->details['head'],
+            'body' => $this->details['body'],
+            'url' => $this->details['url'],
+            'id' => $this->details['id'],
+        ];
+    }
+
+    public function toBroadcast($notifiable){
         return [
             'greeting' => $this->details['greeting'],
             'head' => $this->details['head'],

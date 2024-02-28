@@ -58,7 +58,7 @@
                             </p>
                         @enderror
                         
-                        <button type="submit" id="submitButton" class="btn btn-success w-100 d-none">Submit</button>
+                        <button type="submit" id="submitButton" class="btn btn-success w-25 d-none">Submit</button>
                     </form>
                 </div>
             </div>
