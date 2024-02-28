@@ -30,6 +30,8 @@ Route::middleware('auth:web')->group(function () {
     Route::patch('/profile/{guard}', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('beneficiary/notifications', [BenHomeController::class, 'notifications'])->name('notifications');
+
     Route::prefix('needs')->name('needs.')->group(function () {
         Route::get('/', [BenHomeController::class, 'index'])->name('index');
         Route::get('/create', [BenHomeController::class, 'create'])->name('create');
@@ -37,6 +39,7 @@ Route::middleware('auth:web')->group(function () {
         Route::get('/{need}', [BenHomeController::class, 'show'])->name('show');    
     });
 
+    Route::get('notification', [HomeController::class, 'notification'])->name('notification');
 });
 
 require __DIR__.'/auth.php';

@@ -10,16 +10,23 @@ use App\Models\DryFood;
 use App\Models\DryFoodType;
 use App\Models\Protein;
 use App\Models\ProteinType;
+use App\Notifications\NewDonation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $user = auth()->guard('dist')->user();
-        $donations = $user->donations->reverse();
+        $donations = $user->donations->where('status', '!=', 'pending')->reverse();
 
         return view('dist.donation.index', compact('donations'));
+    }
+
+    public function  notifications(){
+        $notifications = auth()->guard('dist')->user()->Notifications;
+        return view('notifications', compact('notifications'));
     }
 
     public function store(Request $request)
@@ -119,8 +126,21 @@ class HomeController extends Controller
         $donation->quantity = $qty;
         $donation->status = 'confirmed';
         $donation->save();
+
+        $dist = auth()->guard('dist')->user();
+
+        $details = [
+            'head' => 'New Donation',
+            'greeting' => 'Hello '.$dist->name,
+            'body' => 'You have successfully created new Donation',
+            'url' => route('dist.donations.show', $donation->id),
+            'id' => $donation->id,
+        ];
+
+        Notification::send($dist, new NewDonation($details));
+
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
-                
+        
     }
 
     public function cooked(Request $request){
@@ -140,6 +160,18 @@ class HomeController extends Controller
         $donation->quantity = $request->quantity;
         $donation->status = 'confirmed';
         $donation->save();
+
+        $dist = auth()->guard('dist')->user();
+
+        $details = [
+            'head' => 'New Donation',
+            'greeting' => 'Hello '.$dist->name,
+            'body' => 'You have successfully created new Donation',
+            'url' => route('dist.donations.show', $donation->id),
+            'id' => $donation->id,
+        ];
+
+        Notification::send($dist, new NewDonation($details));
         
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 
@@ -194,6 +226,18 @@ class HomeController extends Controller
         $donation->quantity = $qty;
         $donation->status = 'confirmed';
         $donation->save();
+
+        $dist = auth()->guard('dist')->user();
+
+        $details = [
+            'head' => 'New Donation',
+            'greeting' => 'Hello '.$dist->name,
+            'body' => 'You have successfully created new Donation',
+            'url' => route('dist.donations.show', $donation->id),
+            'id' => $donation->id,
+        ];
+
+        Notification::send($dist, new NewDonation($details));
 
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 

@@ -15,7 +15,7 @@ class FoodSolidariry extends Notification
      * Create a new notification instance.
      */
     private $details;
-    
+
     public function __construct($details)
     {
         $this->details = $details;
@@ -49,6 +49,8 @@ class FoodSolidariry extends Notification
      *
      * @return array<string, mixed>
      */
+
+    
     public function toArray(object $notifiable): array
     {
         return [

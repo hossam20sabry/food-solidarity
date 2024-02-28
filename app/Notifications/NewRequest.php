@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewDonation extends Notification
+class NewRequest extends Notification
 {
     use Queueable;
 
@@ -31,6 +31,18 @@ class NewDonation extends Notification
         return ['database'];
     }
 
+    public function toDatabase($notifiable){
+        return [
+            'greeting' => $this->details['greeting'],
+            'head' => $this->details['head'],
+            'body' => $this->details['body'],
+            'url' => $this->details['url'],
+            'id' => $this->details['id'],
+        ];
+    }
+
+
+
     /**
      * Get the mail representation of the notification.
      */
@@ -40,16 +52,6 @@ class NewDonation extends Notification
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
-    }
-
-    public function toDatabase($notifiable){
-        return [
-            'greeting' => $this->details['greeting'],
-            'head' => $this->details['head'],
-            'body' => $this->details['body'],
-            'url' => $this->details['url'],
-            'id' => $this->details['id'],
-        ];
     }
 
     /**

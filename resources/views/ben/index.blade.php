@@ -23,7 +23,7 @@
         <div class="row center flex-space-between mx-1">
         
             <div class="col-md-4 box_shadow p-3 my-1">
-                <button  class="btn btn-primary w-100 text-capitalize" id="create_btn">Add Needs</button>
+                <button  class="btn btn-success w-100 text-capitalize" id="create_btn">Add Needs</button>
             </div>
             <form action="{{ route('needs.store')}}" method="post" id="create" class="d-none">
                 @csrf
@@ -47,7 +47,7 @@
                     
                     <div class="col-md-4 my-2">
                         <label for="name" class="form-label">_</label>
-                        <button type="submit" class="btn btn-primary w-100">Store</button>
+                        <button type="submit" class="btn btn-success w-100">Store</button>
                     </div>
                 </div>
             </form>
@@ -78,11 +78,11 @@
                     <th>{{$need->id}}</th>
                     <td>@if($need->donation_type_id == 1) Dry @elseif($need->donation_type_id == 2) Cooked Meals @elseif($need->donation_type_id == 3) Proteins @endif</td>
                     <td class="table_responsive">{{$need->quantity}}</td>
-                    <td class="table_responsive text-uppercase text-primary">{{$need->status}}</td>
+                    <td class="table_responsive text-uppercase text-success">{{$need->status}}</td>
                     <td class="table_responsive">{{$need->created_at}}</td>
                     <td>
                         <a href="{{ route('needs.show', $need->id)}}">
-                            <button class="btn btn-primary">Details</button>
+                            <button class="btn btn-success">Details</button>
                         </a>
                     </td>
                 </tr>

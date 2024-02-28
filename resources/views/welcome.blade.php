@@ -14,7 +14,7 @@
                         individuals to extend a helping hand to those who have no food.</p>
                 </div>
                 @if(Auth::guard('web')->guest() && Auth::guard('dist')->guest())
-                    <a href="./pages/selectAuth.html" class="btn btn-success">Get Started</a>
+                    <a href="{{ route('select.register')}}" class="btn btn-success">Get Started</a>
                 @endif
             </div>
         </div>

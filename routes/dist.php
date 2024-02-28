@@ -17,6 +17,7 @@ Route::prefix('dist')->name('dist.')->group(function () {
     Route::middleware('dist')->group(function () {
         
         Route::get('/', [HomeController::class, 'index'])->name('index');
+        Route::get('notifications', [DistHomeController::class, 'notifications'])->name('notifications');
 
         Route::get('/profile', [DistProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile/{guard}', [DistProfileController::class, 'update'])->name('profile.update');
@@ -33,6 +34,7 @@ Route::prefix('dist')->name('dist.')->group(function () {
             Route::get('/{donation}', [DistHomeController::class, 'show'])->name('show');
 
             Route::post('/donation-type', [DistHomeController::class, 'donationType'])->name('donationType');
+            Route::post('/notifications', [DistHomeController::class, 'notifications'])->name('notifications');
             Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');
             Route::post('/dry-food', [DistHomeController::class, 'dryFood'])->name('dryFood');
         });

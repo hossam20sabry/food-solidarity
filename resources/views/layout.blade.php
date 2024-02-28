@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href={{asset('/home/css/style2.css')}}>   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href={{asset('/home/css/style2.css')}}>  
+    <link rel="stylesheet" href={{asset('/home/css/notify.css')}}>  
+
     <link rel="stylesheet" href="@yield('css')">
     {{-- <link rel="icon" href="{{asset('home/img/logo 102.png')}}"> --}}
     <title>Food Solidarity</title>
@@ -14,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         
-        <div class="container">
+        <div class="container" style="position: relative">
 
             <a class="navbar-brand" href="/">Food Solidarity</a>
 
@@ -26,21 +29,34 @@
             <div class="collapse navbar-collapse " id="navbarNavDropdown">
 
                 <ul class="navbar-nav me-auto mb-2 mt-3">
+                    
                     @if(Auth::guard('dist')->check())
+                    <li class="nav-item">
+                        <a href="{{ route('dist.notifications')}}" class="nav-link text-capitalize">Notifications</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('dist.donations.index')}}" class="nav-link text-capitalize">Donations</a>
                     </li>
                     @endif
+
                     @if(Auth::guard('web')->check())
+                    <li class="nav-item">
+                        <a href="{{ route('notifications')}}" class="nav-link text-capitalize">Notifications</a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Requests</a>
                     </li>
                     @endif
+                    
                 </ul>
 
                 @if(Auth::guard('dist')->check())
+                
+                
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize nav_item text-center box_shadow" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    
+                    <a class="nav-link dropdown-toggle text-capitalize nav_item text-center border rounded" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
                             $userNameParts = explode(' ', Auth::guard('dist')->user()->name, 2);
                             $displayName = $userNameParts[0];
@@ -60,7 +76,7 @@
                 @elseif(Route::has('login'))
                 @auth
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-capitalize nav_item text-center box_shadow" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-capitalize nav_item text-center border rounded" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
                             $userNameParts = explode(' ', Auth::user()->name, 2);
                             $displayName = $userNameParts[0];
@@ -93,8 +109,14 @@
                 </div> 
                 @endauth
                 @endif
+
+                
             </div>
+            
+            
         </div>
+
+        
     </nav>
     
 
@@ -113,5 +135,7 @@
     crossorigin="anonymous"></script>
 
     @yield('script')
+
+    <script src="{{asset('/home/js/notify.js')}}"></script>
 </body>
 </html>

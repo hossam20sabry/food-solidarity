@@ -23,7 +23,7 @@
             <div class="col-md-4 box_shadow p-3 my-1">
                 <form action="{{ route('dist.donations.store') }}" method="post">
                     @csrf
-                    <button  class="btn btn-primary w-100 text-capitalize" id="create_btn">Add Donation</button>
+                    <button  class="btn btn-success w-100 text-capitalize" id="create_btn">Add Donation</button>
                 </form>
             </div>
             
@@ -53,11 +53,11 @@
                     <th>{{$donation->id}}</th>
                     <td>@if($donation->donation_type == 1) Dry @elseif($donation->donation_type == 2) Cooked Meals @elseif($donation->donation_type == 3) Proteins @endif</td>
                     <td class="table_responsive">{{$donation->quantity}}</td>
-                    <td class="table_responsive text-uppercase text-primary">{{$donation->status}}</td>
+                    <td class="table_responsive text-uppercase text-success">{{$donation->status}}</td>
                     <td class="table_responsive">{{$donation->created_at}}</td>
                     <td>
                         <a href="{{ route('dist.donations.show', $donation->id)}}">
-                            <button class="btn btn-primary">Details</button>
+                            <button class="btn btn-success">Details</button>
                         </a>
                     </td>
                 </tr>

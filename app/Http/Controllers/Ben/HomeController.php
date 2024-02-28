@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Ben;
 
 use App\Http\Controllers\Controller;
 use App\Models\Need;
+use App\Notifications\NewRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -14,6 +16,11 @@ class HomeController extends Controller
         $needs = $user->needs;
 
         return view('ben.index', compact('needs'));
+    }
+
+    public function notifications(){
+        $notifications = auth()->user()->Notifications;
+        return view('notifications', compact('notifications'));
     }
 
     public function store(Request $request)
@@ -28,30 +35,28 @@ class HomeController extends Controller
         }
         //end validation
 
-        if($user->authType->name == 'individual'){
-            
-            if($request->qty > 10){
-                return redirect()->back()->with('error', 'Maxmimum quantity is 10');
-            }
-            
-            $need = Need::create([
-                'user_id' => auth()->user()->id,
-                'donation_type_id' => $request->type,
-                'quantity' => $request->qty,
-                'status' => 'confirmed',
-            ]);
-
-            return redirect()->back()->with('status', 'Needs created successfully');
+        if($user->authType->name == 'individual' && $request->qty > 10){
+            return redirect()->back()->with('error', 'Maxmimum quantity is 10');
         }
 
         
         $need = Need::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => $user->id,
             'donation_type_id' => $request->type,
             'quantity' => $request->qty,
             'status' => 'confirmed',
         ]);
-    
+
+        $details = [
+            'head' => 'New Request',
+            'greeting' => 'Hello '.$user->name,
+            'body' => 'You have successfully created new Request',
+            'url' => route('needs.show', $need->id),
+            'id' => $need->id,
+        ];
+
+        Notification::send($user, new NewRequest($details));
+
         return redirect()->back()->with('status', 'Needs created successfully');
 
     }
