@@ -3,11 +3,12 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewRequest extends Notification
+class NewRequest extends Notification implements ShouldBroadcast
 {
     use Queueable;
 
@@ -28,7 +29,7 @@ class NewRequest extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     public function toDatabase($notifiable){
@@ -52,6 +53,16 @@ class NewRequest extends Notification
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
+    }
+
+    public function toBroadcast($notifiable){
+        return [
+            'greeting' => $this->details['greeting'],
+            'head' => $this->details['head'],
+            'body' => $this->details['body'],
+            'url' => $this->details['url'],
+            'id' => $this->details['id'],
+        ];
     }
 
     /**

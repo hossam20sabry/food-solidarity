@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Need;
 use App\Notifications\NewRequest;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Events\BroadcastNotificationCreated;
 use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
@@ -56,6 +57,9 @@ class HomeController extends Controller
         ];
 
         Notification::send($user, new NewRequest($details));
+        
+
+        // event(new NewRequest($details));
 
         return redirect()->back()->with('status', 'Needs created successfully');
 

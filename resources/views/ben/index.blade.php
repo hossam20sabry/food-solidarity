@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-md-4 my-2">
                         <label for="qty" class="form-label">Quantity</label>
-                        <input type="number" name="qty" placeholder="Quantity" class="form-control">
+                        <input type="number" name="qty" placeholder="Quantity" min="1" class="form-control">
                     </div>
                     
                     <div class="col-md-4 my-2">
