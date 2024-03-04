@@ -73,7 +73,7 @@
             </thead>
             <tbody>
                 @foreach ($needs as $need)
-                @if($need->status == 'confirmed')
+                @if($need->status != 'pending')
                 <tr>
                     <th>{{$need->id}}</th>
                     <td>@if($need->donation_type_id == 1) Dry @elseif($need->donation_type_id == 2) Cooked Meals @elseif($need->donation_type_id == 3) Proteins @endif</td>

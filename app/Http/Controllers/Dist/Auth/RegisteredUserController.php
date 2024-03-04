@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dist\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\AuthType;
+use App\Models\City;
 use App\Models\Dist;
 use App\Models\DistAuthType;
 use App\Models\User;
@@ -25,7 +26,8 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $authorTypes = DistAuthType::all();
-        return view('dist.auth.register', compact('authorTypes'));
+        $cities = City::all();
+        return view('dist.auth.register', compact('authorTypes', 'cities'));
     }
 
     /**
@@ -35,11 +37,13 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'dist_auth_type_id' => ['required'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Dist::class],
-            'phone' => ['required', 'string', 'max:255', 'unique:'.Dist::class],
+            'name' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'dist_auth_type_id' => ['required', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'address' => ['required', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Dist::class, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'phone' => ['required', 'string', 'max:255', 'unique:'.Dist::class, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -48,6 +52,8 @@ class RegisteredUserController extends Controller
             'dist_auth_type_id' => $request->dist_auth_type_id,
             'email' => $request->email,
             'phone' => $request->phone,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
 

@@ -13,10 +13,9 @@
 </head>
 <body>
     <div class="container center min_height">
-        
-        <div class="form_shape p-3">
+        <div class="row box_shadow m-1 form_shape">
             <a href="/" class="logo p-3">
-                <img src="{{asset('/home/img/2355925.jpg')}}" alt="">
+                <img src="{{asset('/home/img/2355925.jpg')}}" class="responsive_size" alt="">
             </a>
             <form method="POST" action="{{ route('dist.login') }}" class="p-2">
                 @csrf
@@ -62,7 +61,6 @@
                 @endif
             </form>
         </div>
-        
     </div>
 
     <div class="mainSpinner d-none" id="mainSpinner">

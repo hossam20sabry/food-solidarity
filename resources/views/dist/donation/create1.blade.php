@@ -14,6 +14,16 @@
 </div>
 @endif
 
+@if($errors->any())
+<div class="container">
+        <div class="alert alert-danger m-2">
+            @foreach ($errors->all() as $error)
+            {{ $error }}
+            @endforeach
+        </div>
+</div>
+@endif
+
 <div class="container">
     <div class="row min-height d-flex flex-column justify-content-center align-items-center" style="position: relative;">
         
@@ -34,30 +44,18 @@
             </div>
 
             <div class="col-md-6 p-2">
-                <div class="row d-flex justify-content-center">
-                    <h5 class="text-center">Selected Dry Food</h5>
-                    <p class="text-center text-muted">Quantity Measured by kilogram</p>
+                <div class="row d-flex justify-content-center box_shadow rounded p-3">
+                    <h5 class="">Selected Dry Food</h5>
+                    <p class="text-muted">Quantity Measured by kilogram <br><span class="text-danger">If you enter empty fields, the food will be deleted</span></p>
                     
-                    <form action="{{ route('dist.donations.dry')}}" class="col-12 m-1 w-75 p-2" method="post" id="selectedDry">
+                    <form action="{{ route('dist.donations.dry')}}" class="col-12 m-1  p-2" method="post" id="selectedDry">
                         @csrf
                         <input type="hidden" name="donation_id" id="donation_id"  value="{{$donation->id}}">
                         
-                        <h6 class="text-center mt-5" id="selectedDryText">No Items Selected</h6>
+                        <h6 class="text-center mt-5 text-muted" id="selectedDryText">No Items Selected</h6>
                         <div id="submitContainer" class="row">
                             <!-- Inputs will be appended here -->
                         </div>
-                        @error('quantity')
-                            <p class="text-danger">
-                                {{$message}}
-                            </p>
-                        @enderror
-
-                        @error('expDate')
-                            <p class="text-danger">
-                                {{$message}}
-                            </p>
-                        @enderror
-                        
                         <button type="submit" id="submitButton" class="btn btn-success w-25 d-none">Submit</button>
                     </form>
                 </div>
@@ -102,8 +100,8 @@
         setTimeout(() => {
             $('#submitContainer').append('<input type="hidden" name="dry_food_id[]" value="'+id+'">');
             $('#submitContainer').append('<div class="col-12 parent'+id+'"><label for="quantity" class="form-label lapel'+id+'">'+$('.item'+id).text()+' Quantity and Expiry</label></div>');
-            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="number" required placeholder="Enter quantity"  data-id="' + id + '" name="quantity[]" min="1" class="form-control mb-1"></div>');
-            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]" required min="{{ date('Y-m-d') }}"  data-id="' + id + '" name="expDate[]"  class="form-control mb-3"></div>');
+            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="number" placeholder="Enter quantity"  data-id="' + id + '" name="quantity[]" min="1" class="form-control mb-1"></div>');
+            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]" min="{{ date('Y-m-d') }}"  data-id="' + id + '" name="expDate[]"  class="form-control mb-3"></div>');
             mainSpinner.classList.add('d-none');
             $('.item'+id).addClass('active');
         }, 500);

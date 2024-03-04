@@ -13,6 +13,7 @@ class Need extends Model
         'user_id',
         'quantity',
         'donation_type_id',
+        'city_id',
         'status',
     ];
 

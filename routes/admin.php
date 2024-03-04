@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AuthType\AuthTypesController;
 use App\Http\Controllers\Admin\AuthType\DistAuthTypesController;
 use App\Http\Controllers\Admin\AwarenessArticle\AwarenessArticlesController;
+use App\Http\Controllers\Admin\City\CitiesController;
 use App\Http\Controllers\Admin\DonationType\DonationTypesController;
 use App\Http\Controllers\Admin\DryFoodType\DryFoodTypesController;
 use App\Http\Controllers\Admin\ProteinTypes\ProteinTypesController;
@@ -73,6 +74,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/{awarenessArticle}/edit', [AwarenessArticlesController::class, 'edit'])->name('edit');
             Route::patch('/{awarenessArticle}', [AwarenessArticlesController::class, 'update'])->name('update');
             Route::delete('/{awarenessArticle}', [AwarenessArticlesController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('cities')->name('cities.')->group(function () {
+            Route::get('/', [CitiesController::class, 'index'])->name('index');
+            Route::get('/create', [CitiesController::class, 'create'])->name('create');
+            Route::post('/', [CitiesController::class, 'store'])->name('store');
+            Route::get('/{city}/edit', [CitiesController::class, 'edit'])->name('edit');
+            Route::patch('/{city}', [CitiesController::class, 'update'])->name('update');
+            Route::delete('/{city}', [CitiesController::class, 'destroy'])->name('destroy');
         });
 
     });

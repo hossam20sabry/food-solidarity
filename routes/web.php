@@ -40,6 +40,7 @@ Route::middleware('auth:web')->group(function () {
     });
 
     Route::get('notification', [HomeController::class, 'notification'])->name('notification');
+    Route::get('notification/read', [HomeController::class, 'read'])->name('notification.read');
 });
 
 require __DIR__.'/auth.php';

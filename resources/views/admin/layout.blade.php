@@ -22,6 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">       
                 <a href="{{ route('admin.index') }}" class="nav-link text-capitalize border-start">Admins</a>            
+                <a href="{{ route('admin.cities.index') }}" class="nav-link text-capitalize border-start">Cites</a>            
                 <a href="{{ route('admin.authTypes.index') }}" class="nav-link text-capitalize border-start">Ben Authors</a>         
                 <a href="{{ route('admin.distAuthTypes.index') }}" class="nav-link text-capitalize border-start">Dist Authors</a>         
                 <a href="{{ route('admin.dryFoodTypes.index') }}" class="nav-link text-capitalize border-start">Dry Foods </a>            

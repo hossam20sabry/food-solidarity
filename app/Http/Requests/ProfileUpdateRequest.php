@@ -20,8 +20,8 @@ class ProfileUpdateRequest extends FormRequest
         $user = Auth::guard($guard)->user();
         
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(get_class($user))->ignore($user->id)],
+            'name' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(get_class($user))->ignore($user->id), 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
         ];
     }
 }

@@ -39,6 +39,8 @@ class NewRequest extends Notification implements ShouldBroadcast
             'body' => $this->details['body'],
             'url' => $this->details['url'],
             'id' => $this->details['id'],
+            'icon' => 'help.png',
+            'created_at' => now()->diffForHumans(),
         ];
     }
 
@@ -62,6 +64,8 @@ class NewRequest extends Notification implements ShouldBroadcast
             'body' => $this->details['body'],
             'url' => $this->details['url'],
             'id' => $this->details['id'],
+            'icon' => 'help.png',
+            'created_at' => now()->diffForHumans(),
         ];
     }
 

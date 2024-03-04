@@ -14,13 +14,18 @@ class HomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $needs = $user->needs;
+        $needs = $user->needs->reverse();
 
         return view('ben.index', compact('needs'));
     }
 
     public function notifications(){
-        $notifications = auth()->user()->Notifications;
+        
+        $notifications = auth()->user()->Notifications()
+                                    ->latest() 
+                                    ->take(15)
+                                    ->get();
+
         return view('notifications', compact('notifications'));
     }
 
@@ -45,21 +50,20 @@ class HomeController extends Controller
             'user_id' => $user->id,
             'donation_type_id' => $request->type,
             'quantity' => $request->qty,
+            'city_id' => $user->city_id,
             'status' => 'confirmed',
         ]);
 
-        $details = [
-            'head' => 'New Request',
-            'greeting' => 'Hello '.$user->name,
-            'body' => 'You have successfully created new Request',
-            'url' => route('needs.show', $need->id),
-            'id' => $need->id,
-        ];
+        // $details = [
+        //     'head' => 'New Request',
+        //     'greeting' => 'Hello '.$user->name,
+        //     'body' => 'You have successfully created new Request',
+        //     'url' => route('needs.show', $need->id),
+        //     'id' => $need->id,
+        // ];
 
-        Notification::send($user, new NewRequest($details));
+        // Notification::send($user, new NewRequest($details));
         
-
-        // event(new NewRequest($details));
 
         return redirect()->back()->with('status', 'Needs created successfully');
 
@@ -68,6 +72,22 @@ class HomeController extends Controller
     public function show(Need $need)
     {
         $ben = auth()->user();
+
+        foreach ($ben->unreadNotifications as $notification) {
+            if ($notification->data['id'] == $need->id) {
+                $notification->markAsRead();
+                break;
+            }
+        }
+
         return view('ben.show', compact('need', 'ben'));
+    }
+
+    public function read(){
+        $counter = auth()->user()->unreadNotifications->count();
+        return response()->json([
+            'success' => 200,
+            'counter' => $counter
+        ]);
     }
 }

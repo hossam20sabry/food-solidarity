@@ -22,8 +22,8 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::guard('dist')->user()->id],
+            'name' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::guard('dist')->user()->id, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
         ]);
 
         $dist = Dist::find(Auth::guard('dist')->user()->id);

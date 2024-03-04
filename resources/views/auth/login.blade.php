@@ -14,13 +14,13 @@
 <body>
     <div class="container center min_height">
         
-        <div class="form_shape p-3">
+        <div class="row box_shadow m-1 p-2 form_shape">
             <a href="/" class="logo p-3">
-                <img src="{{asset('/home/img/ssssss.png')}}" alt="">
+                <img src="{{asset('/home/img/ssssss.png')}}" class="responsive_size" alt="">
             </a>
             <form method="POST" action="{{ route('login') }}" class="p-2">
                 @csrf
-                <h3 class="text-uppercase text-center">Beneficiary Login</h3>
+                <h3 class="text-uppercase text-center">Benficiary Login</h3>
                 <div class="mb-3">
                     <label for="email" class="form-label" >Email address</label>
                     <input type="email" class="form-control" id="email" name="email" :value="old('email')" required autofocus autocomplete="username" aria-describedby="emailHelp">
@@ -39,16 +39,17 @@
                     </div>
                     @enderror
                 </div>
+
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
                     <label class="form-check-label" for="remember_me">Remember me</label>
                 </div>
+
                 <button type="submit" class="btn btn-primary w-100 spiner">Log in</button>
                 
-                
                 <div class="center mt-2">
-                    @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    @if (Route::has('dist.password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('dist.password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif

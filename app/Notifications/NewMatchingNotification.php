@@ -4,11 +4,10 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewDonation extends Notification implements ShouldBroadcast
+class NewMatchingNotification extends Notification
 {
     use Queueable;
 
@@ -16,7 +15,6 @@ class NewDonation extends Notification implements ShouldBroadcast
      * Create a new notification instance.
      */
     private $details;
-
     public function __construct($details)
     {
         $this->details = $details;
@@ -43,30 +41,6 @@ class NewDonation extends Notification implements ShouldBroadcast
                     ->line('Thank you for using our application!');
     }
 
-    public function toDatabase($notifiable){
-        return [
-            'greeting' => $this->details['greeting'],
-            'head' => $this->details['head'],
-            'body' => $this->details['body'],
-            'url' => $this->details['url'],
-            'id' => $this->details['id'],
-            'icon' => 'accept.png',
-            'created_at' => now()->diffForHumans(),
-        ];
-    }
-
-    public function toBroadcast($notifiable){
-        return [
-            'greeting' => $this->details['greeting'],
-            'head' => $this->details['head'],
-            'body' => $this->details['body'],
-            'url' => $this->details['url'],
-            'id' => $this->details['id'],
-            'icon' => 'accept.png',
-            'created_at' => now()->diffForHumans(),
-        ];
-    }
-
     /**
      * Get the array representation of the notification.
      *
@@ -76,6 +50,31 @@ class NewDonation extends Notification implements ShouldBroadcast
     {
         return [
             //
+        ];
+    }
+
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'greeting' => $this->details['greeting'],
+            'head' => $this->details['head'],
+            'body' => $this->details['body'],
+            'url' => $this->details['url'],
+            'id' => $this->details['id'],
+        ];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return [
+            'greeting' => $this->details['greeting'],
+            'head' => $this->details['head'],
+            'body' => $this->details['body'],
+            'url' => $this->details['url'],
+            'id' => $this->details['id'],
+            'icon' => 'accept.png',
+            'created_at' => now()->diffForHumans(),
         ];
     }
 }

@@ -38,6 +38,8 @@ Route::prefix('dist')->name('dist.')->group(function () {
             Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');
             Route::post('/dry-food', [DistHomeController::class, 'dryFood'])->name('dryFood');
         });
+
+        
     });
 
     require __DIR__.'/distAuth.php';

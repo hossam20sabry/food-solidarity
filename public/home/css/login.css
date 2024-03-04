@@ -8,8 +8,6 @@
 }
 .form_shape{
     width: 400px;
-    /* background-color: rgba(229, 229, 238, 0.685); */
-    /* background-color: rgba(229, 229, 238, 0.685); */
     box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
     border-radius: 5px;
     
@@ -17,10 +15,18 @@
 .logo{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
     /* border-bottom: 1px solid rgb(64, 137, 219); */
 }
 .logo img{
-    width: 90px;
-    height: 90px;
+    width: 400px;
+}
+.box_shadow{
+    box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
+}
+
+@media screen and (max-width: 768px) {
+    .responsive_size{
+        width: 200px !important;
+    }
 }

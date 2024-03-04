@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dist;
 
+use App\Events\DonationCreated;
 use App\Http\Controllers\Controller;
 use App\Models\CookedMeal;
 use App\Models\Donation;
@@ -25,7 +26,11 @@ class HomeController extends Controller
     }
 
     public function  notifications(){
-        $notifications = auth()->guard('dist')->user()->Notifications;
+        $notifications = auth()->guard('dist')->user()->Notifications()
+                                            ->latest() 
+                                            ->take(15)
+                                            ->get();
+
         return view('notifications', compact('notifications'));
     }
 
@@ -86,7 +91,7 @@ class HomeController extends Controller
             'quantity.*' => 'required|numeric|min:1',
             'expDate.*' => 'required|date',
         ]);
-
+        
         $donation = Donation::find($request->donation_id);
 
         $dryFoods = $request->input('dry_food_id');
@@ -137,7 +142,9 @@ class HomeController extends Controller
             'id' => $donation->id,
         ];
 
-        Notification::send($dist, new NewDonation($details));
+        // Notification::send($dist, new NewDonation($details));
+
+        event(new DonationCreated($donation));
 
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
         
@@ -171,7 +178,9 @@ class HomeController extends Controller
             'id' => $donation->id,
         ];
 
-        Notification::send($dist, new NewDonation($details));
+        event(new DonationCreated($donation));
+
+        // Notification::send($dist, new NewDonation($details));
         
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 
@@ -237,7 +246,9 @@ class HomeController extends Controller
             'id' => $donation->id,
         ];
 
-        Notification::send($dist, new NewDonation($details));
+        event(new DonationCreated($donation));
+
+        // Notification::send($dist, new NewDonation($details));
 
         return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
 
@@ -245,7 +256,14 @@ class HomeController extends Controller
 
     public function show($id)
     {
+        $dist = auth()->guard('dist')->user();
         $donation = Donation::find($id);
+        foreach ($dist->unreadNotifications as $notification) {
+            if ($notification->data['id'] == $donation->id) {
+                $notification->markAsRead();
+                break;
+            }
+        }
         return view('dist.donation.show', compact('donation'));
     }
 }

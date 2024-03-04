@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('auth_type_id');
+            $table->unsignedBigInteger('city_id');
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('email')->unique();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('auth_type_id')->references('id')->on('auth_types');
+            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 

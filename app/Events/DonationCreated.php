@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewNotification implements ShouldBroadcast
+class DonationCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -18,11 +18,11 @@ class NewNotification implements ShouldBroadcast
      * Create a new event instance.
      */
 
-    public $details;
+    public $donation;
 
-    public function __construct($details)
+    public function __construct($donation)
     {
-        return $this->details = $details;
+        return $this->donation = $donation;
     }
 
     /**
@@ -33,7 +33,7 @@ class NewNotification implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('new-request'),
+            new PrivateChannel('App.Models.User.'.$this->donation->need->user->id),
         ];
     }
 }

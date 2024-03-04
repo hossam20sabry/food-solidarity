@@ -11,10 +11,10 @@
                 @foreach ($notifications as $notification)
                 <div class="col-12 mb-3 border @if (!$notification->read_at) border-success @endif rounded p-3">
                     <div class="row">
-                        <div class="col-sm-9">
+                        <div class="col-6">
                             <h5 class="text-success">{{$notification->data['head']}}</h5>
                         </div>
-                        <div class="col-sm-3 d-flex justify-content-end">
+                        <div class="col-6 d-flex justify-content-end">
                             <p class="text-muted">{{$notification->created_at->diffForHumans()}}</p>
                         </div>
                         <div class="col-sm-9">

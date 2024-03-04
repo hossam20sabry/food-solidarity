@@ -6,27 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.10.0/dist/toastify.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href={{asset('/home/css/style2.css')}}>  
     <link rel="stylesheet" href={{asset('/home/css/notify.css')}}>  
-    {{-- <script>
-
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('a72b09cd71426c5a340b', {
-            cluster: 'eu'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data));
-        });
-
-    </script> --}}
+    
 
     <link rel="stylesheet" href="@yield('css')">
-    {{-- <link rel="icon" href="{{asset('home/img/logo 102.png')}}"> --}}
     <title>Food Solidarity</title>
 </head>
 <body>
@@ -64,16 +50,9 @@
                 <a  href="{{ route('dist.notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
 
                     <i class="fas fa-bell" style="font-size: 25px;color: black;"></i>
-                    <span class="badge" id="counter"
-                    style="position: absolute;
-                    top: -8px;
-                    right: -8px;
-                    background-color: red;
-                    color: white;
-                    border-radius: 50%;
-                    padding: 5px 8px;
-                    font-size: 12px;">{{ count(Auth::guard('dist')->user()->unreadNotifications) }}</span>
-                    
+                    @if(count(Auth::guard('dist')->user()->unreadNotifications) > 0)
+                    <span class="badge badge_style" id="counter">{{ count(Auth::guard('dist')->user()->unreadNotifications) }}</span>
+                    @endif
                 </a>
                 <div class="nav-item dropdown">
 
@@ -101,16 +80,9 @@
                     <a  href="{{ route('notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
 
                         <i class="fas fa-bell" style="font-size: 25px; color: black;"></i>
-                        <span class="badge" id="counter"
-                        style="position: absolute;
-                        top: -8px;
-                        right: -8px;
-                        background-color: red;
-                        color: white;
-                        border-radius: 50%;
-                        padding: 5px 8px;
-                        font-size: 12px;">{{ count(Auth::guard('web')->user()->unreadNotifications) }}</span>
-                        
+                        @if(count(Auth::guard('web')->user()->unreadNotifications) > 0)
+                        <span class="badge badge_style" id="counter">{{ count(Auth::guard('web')->user()->unreadNotifications) }}</span>
+                        @endif
                     </a>
                     @endif
                     <div class="nav-item dropdown">
@@ -159,19 +131,23 @@
         
     </nav>
 
-    {{-- <div class="toast-container position-fixed top-0 end-0 p-3">
+    
+    <div class="toast-container position-fixed top-0 end-0 p-3">
         <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
+            <a href="#" class="toast-header" style="text-decoration: none; color: black;">
+                <img src="" class="rounded me-2" style="width: 25px; height: 25px" alt="...">
+                <strong class="me-auto"></strong>
+                <small></small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
+            </a>
             <div class="toast-body">
-                Hello, world! This is a toast message.
+                <a href="{{ route('notifications') }}" class="text-decoration-none">
+                    <p class="text-muted"></p>
+                </a>
             </div>
         </div>
-    </div> --}}
+    </div>
+    
     
 
     @yield('content')
@@ -190,6 +166,9 @@
 
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.10.0/dist/toastify.min.js"></script>
+
+
 
     @yield('script')
 
@@ -202,27 +181,31 @@
         });
     </script> --}}
 
+    @php
+        $notificationCount = 0;
+
+        if(Auth::guard('dist')->check())
+        {
+            $guard = 'dist';
+            $user = Auth::guard('dist')->user();
+            if(isset($user))
+                $notificationCount = count($user->unreadNotifications);
+        }
+        else
+        {
+            $guard = 'web';
+            $user = Auth::guard('web')->user();
+            if(isset($user))
+                $notificationCount = count($user->unreadNotifications);
+        }
+    @endphp
 
     <script>
-        const id = "{{ Auth::id() }}";
-
-        // Pusher.logToConsole = true;
-
-        // var pusher = new Pusher('a72b09cd71426c5a340b', {
-        //     cluster: 'eu'
-        // });
-
-        // var channel = pusher.subscribe('App.Models.User.' + id);
-
-        // channel.bind(function(data) {
-        //     console.log("pusher is here");
-        //     alert(JSON.stringify(data));
-        // });
-
+        const id = "{{ Auth::guard($guard)->id() }}";
+        const notificationCount = @JSON($notificationCount);
     </script>
 
 
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     @vite(['resources/js/app.js'])
 
 </body>

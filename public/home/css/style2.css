@@ -159,8 +159,23 @@ body{
     width: 22rem;
     height: 30rem;
 }
-
-
+.fa-bell{
+    font-size: 25px;
+    color: black;
+}
+.badge_style{
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 12px;
+}
+.notification{
+    margin: 0px 14px !important;
+}
 @media screen and (max-width: 768px) {
     .table_responsive{
         display: none;
@@ -186,6 +201,9 @@ body{
     .ben-img-size{
         width: 15rem;
         height: 15rem;
+    }
+    .notification{
+        margin: 10px 5px !important;
     }
     
 }
