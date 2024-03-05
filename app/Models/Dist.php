@@ -16,6 +16,7 @@ class Dist extends Authenticatable
         'name',
         'email',
         'phone',
+        'address',
         'city_id',
         'dist_auth_type_id',
         'password',

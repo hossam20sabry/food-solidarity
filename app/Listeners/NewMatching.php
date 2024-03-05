@@ -35,9 +35,7 @@ class NewMatching
 
         foreach($needs as $need) {
             if($need->status == 'confirmed') {
-                $need->donation_id = $donation->id;
-                $need->status = 'matched';
-                $need->save();
+                 
                 
                 $donation->status = 'matched';
                 $donation->save();

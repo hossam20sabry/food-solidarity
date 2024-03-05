@@ -16,7 +16,7 @@
 
     <form method="POST" action="{{ route('dist.register') }}">
         @csrf
-        <div class="row mt-3 box_shadow p-2">
+        <div class="row my-3 box_shadow p-2">
             <div class="col-md-6">
                 <div class="logo p-3">
                     <img src="{{asset('/home/img/2355925.jpg')}}" alt="">
