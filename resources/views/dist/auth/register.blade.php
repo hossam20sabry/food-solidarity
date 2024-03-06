@@ -14,7 +14,7 @@
 <body>
 <div class="container mt-3 min_height">
 
-    <form method="POST" action="{{ route('dist.register') }}">
+    <form method="POST" action="{{ route('dist.register') }}" id="register">
         @csrf
         <div class="row my-3 box_shadow p-2">
             <div class="col-md-6">
@@ -26,6 +26,7 @@
                 <h3 class="text-center ">Donors Registration</h3>
 
                 <div class="row border-top my-2 py-2">
+                    
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="name" class="form-label" >Name</label>
@@ -83,6 +84,7 @@
                         </div>
                         @enderror
                     </div>
+
                     <div class="col-12">
                         <div class="mb-3">
                             <label for="address" class="form-label" >address</label>
@@ -106,6 +108,7 @@
                         </div>
                         @enderror
                     </div>
+
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -117,6 +120,7 @@
                         </div>
                         @enderror
                     </div>
+
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirm Password</label>
@@ -128,8 +132,9 @@
                         </div>
                         @enderror
                     </div>
+
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success w-100" id="spiner">Register</button>
+                        <button type="submit" class="btn btn-success w-100" id="login">Register</button>
                         
                         <div class="center mt-2">
                             <a href="{{ route('dist.login') }}" class="mx-3" >Already have an account?</a>
@@ -145,6 +150,8 @@
 
 
 </div>
+
+
 <div class="mainSpinner d-none" id="mainSpinner">
     <div class="spinner-border text-primary" role="status">
         <span class="sr-only"></span>
@@ -154,17 +161,25 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
-    crossorigin="anonymous"></script>
+integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+crossorigin="anonymous"></script>
+<script>
+    
+    $(document).ready(function(){
+        $('#login').click(function(){
+            $('#mainSpinner').removeClass('d-none');
+        });
+    });
+
+</script>
+
+
 
     {{-- <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
         ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});
     </script> --}}
 
-<script>
-    $('#spiner').on('click', function(){
-        $('#mainSpinner').removeClass('d-none');
-    });
+{{-- <script>
 
     // let map;
 
@@ -179,7 +194,7 @@
 
     // initMap();
 
-</script>
+</script> --}}
 
 </body>
 </html>

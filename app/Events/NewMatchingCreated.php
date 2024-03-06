@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class DonationCreated
+class NewMatchingCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -18,11 +18,10 @@ class DonationCreated
      * Create a new event instance.
      */
 
-    public $donation;
-
-    public function __construct($donation)
+    public $need;
+    public function __construct($need)
     {
-        return $this->donation = $donation;
+        return $this->need = $need;
     }
 
     /**
@@ -33,7 +32,7 @@ class DonationCreated
     public function broadcastOn(): array
     {
         return [
-            // new PrivateChannel('App.Models.User.'.$this->donation->need->user->id),
+            new PrivateChannel('channel-name'),
         ];
     }
 }

@@ -14,15 +14,16 @@
 <body>
     <div class="container center min_height">
         <div class="row box_shadow m-1 form_shape">
-            <a href="/" class="logo p-3">
-                <img src="{{asset('/home/img/2355925.jpg')}}" class="responsive_size" alt="">
+            <a href="/" class="logo">
+                <img src="{{asset('/home/img/2355925.jpg')}}" class="responsive_size" alt="" style="width: 280px; height: 250px">
             </a>
-            <form method="POST" action="{{ route('dist.login') }}" class="p-2">
+            <form method="POST" action="{{ route('dist.login') }}" class="p-3">
                 @csrf
-                <h3 class="text-uppercase text-center">Distributor Login</h3>
+                <h3 class="text-uppercase text-center mb-2">Distributor Login</h3>
+                <hr class="text-muted">
                 <div class="mb-3">
                     <label for="email" class="form-label" >Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" :value="old('email')" required autofocus autocomplete="username" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" name="email" :value="old('email')" autofocus autocomplete="username" aria-describedby="emailHelp">
                     @error('email')
                     <div class="form-error">
                         <p class="text-danger mb-3">{{$message}}</p>
@@ -31,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+                    <input type="password" class="form-control" id="password" name="password" autocomplete="current-password">
                     @error('password')
                     <div class="form-error">
                         <p class="text-danger mb-3">{{$message}}</p>
@@ -42,16 +43,16 @@
                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember">
                     <label class="form-check-label" for="remember_me">Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100 spiner">Log in</button>
+                <button type="submit" class="btn btn-success w-100 spiner" id="login">Log in</button>
                 
                 
                 <div class="center mt-2">
                     @if (Route::has('dist.password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('dist.password.request') }}">
+                        <a class=" text-success underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('dist.password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
-                    <a href="{{ route('dist.register') }}" class="mx-3" id="spinner">Register?</a>
+                    <a href="{{ route('dist.register') }}" class="mx-3 text-success" >Register?</a>
 
                 </div>
                 @if (session('status'))
@@ -75,9 +76,13 @@
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>
     <script>
-        $('#spinner').click( function(){
-            $('#mainSpinner').removeClass('d-none');
+        
+        $(document).ready(function(){
+            $('#login').click(function(){
+                $('#mainSpinner').removeClass('d-none');
+            });
         });
+
     </script>
 </body>
 </html>

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\DonationCreated;
+use App\Events\NewMatchingCreated;
 use App\Listeners\NewMatching;
+use App\Listeners\NewMatchingNotificationCreated;
 use App\Notifications\NewDonation;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -25,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
         DonationCreated::class => [
             NewMatching::class,
         ],
+
+        NewMatchingCreated::class => [
+            NewMatchingNotificationCreated::class
+        ]
     ];
 
     /**

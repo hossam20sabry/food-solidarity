@@ -11,6 +11,7 @@ Alpine.start();
 var counter = document.getElementById('counter');
 
 var channel = Echo.private('App.Models.User.'+id);
+
 channel.notification(function(data) {
     const toastElement = document.querySelector('.toast');
     toastElement.children[0].children[0].src = `/home/img/${data.icon}`;

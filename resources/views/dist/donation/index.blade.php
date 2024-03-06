@@ -48,7 +48,7 @@
             </thead>
             <tbody>
                 @foreach ($donations as $donation)
-                @if($donation->status == 'confirmed')
+                {{-- @if($donation->status == 'confirmed') --}}
                 <tr>
                     <th>{{$donation->id}}</th>
                     <td>@if($donation->donation_type == 1) Dry @elseif($donation->donation_type == 2) Cooked Meals @elseif($donation->donation_type == 3) Proteins @endif</td>
@@ -61,7 +61,7 @@
                         </a>
                     </td>
                 </tr>
-                @endif
+                {{-- @endif --}}
                 @endforeach
             </tbody>
         </table>

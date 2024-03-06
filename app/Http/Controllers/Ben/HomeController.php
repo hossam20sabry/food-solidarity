@@ -54,15 +54,15 @@ class HomeController extends Controller
             'status' => 'confirmed',
         ]);
 
-        // $details = [
-        //     'head' => 'New Request',
-        //     'greeting' => 'Hello '.$user->name,
-        //     'body' => 'You have successfully created new Request',
-        //     'url' => route('needs.show', $need->id),
-        //     'id' => $need->id,
-        // ];
+        $details = [
+            'head' => 'New Request',
+            'greeting' => 'Hello '.$user->name,
+            'body' => 'You have successfully created new Request',
+            'url' => route('needs.show', $need->id),
+            'id' => $need->id,
+        ];
 
-        // Notification::send($user, new NewRequest($details));
+        Notification::send($user, new NewRequest($details));
         
 
         return redirect()->back()->with('status', 'Needs created successfully');

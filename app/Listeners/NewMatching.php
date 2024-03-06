@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\DonationCreated;
+use App\Events\NewMatchingCreated;
 use App\Models\Donation;
 use App\Models\Need;
 use App\Models\User;
@@ -35,30 +36,19 @@ class NewMatching
 
         foreach($needs as $need) {
             if($need->status == 'confirmed') {
-                 
+                $need->donation_id = $donation->id;
+                $need->status = 'matched';
+                $need->save();
                 
                 $donation->status = 'matched';
                 $donation->save();
+                
+                event(new NewMatchingCreated($need));
+                $recipientUserId = $need->user->id;
+                
                 break;
             }
         }
-
-        // if($need && $need->status == 'confirmed') {
-        //     $need->donation_id = $donation->id;
-        //     $need->status = 'matched';
-        //     $need->save();
-            
-        //     // $details = [
-        //     //     'head' => 'New Donation for you',
-        //     //     'greeting' => 'Hello '.$ben->name,
-        //     //     'body' => 'You have successfully matched with new donation check it out here',
-        //     //     'url' => route('needs.show', $need->id),
-        //     //     'id' => $need->id,
-        //     // ];
-    
-        //     // Notification::send($dist, new NewMatchingNotification($details));
-
-        // }
 
     }
 }
