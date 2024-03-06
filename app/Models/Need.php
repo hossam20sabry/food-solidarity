@@ -21,4 +21,9 @@ class Need extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function donation()
+    {
+        return $this->belongsTo(Donation::class);
+    }
 }

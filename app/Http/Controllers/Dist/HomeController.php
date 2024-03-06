@@ -135,15 +135,15 @@ class HomeController extends Controller
 
         $dist = auth()->guard('dist')->user();
 
-        // $details = [
-        //     'head' => 'New Donation',
-        //     'greeting' => 'Hello '.$dist->name,
-        //     'body' => 'You have successfully created new Donation',
-        //     'url' => route('dist.donations.show', $donation->id),
-        //     'id' => $donation->id,
-        // ];
+        $details = [
+            'head' => 'New Donation',
+            'greeting' => 'Hello '.$dist->name,
+            'body' => 'You have successfully created new Donation',
+            'url' => route('dist.donations.show', $donation->id),
+            'id' => $donation->id,
+        ];
 
-        // Notification::send($dist, new NewDonation($details));
+        Notification::send($dist, new NewDonation($details));
 
         $needs = Need::where('city_id', $dist->city_id)->get();
 
@@ -171,7 +171,7 @@ class HomeController extends Controller
         }
 
         if($ch == 0){
-            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. you will receive notification when your need is matched');
+            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. you will receive notification when your Donation is matched');
         }
         else{
             Notification::send($need->user, new NewMatchingNotification ($details));
@@ -208,12 +208,38 @@ class HomeController extends Controller
             'id' => $donation->id,
         ];
 
-        event(new DonationCreated($donation));
+        $needs = Need::where('city_id', $dist->city_id)->get();
 
-        // Notification::send($dist, new NewDonation($details));
-        
-        return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
+        $ch = 0;
+        foreach($needs as $need) {
+            if($need->status == 'confirmed') {
+                $need->donation_id = $donation->id;
+                $need->status = 'matched';
+                $need->save();
+                
+                $donation->status = 'matched';
+                $donation->save();
+                
+                $ch = 1;
+                
+                $details = [
+                    'head' => 'New Donation',
+                    'greeting' => 'Hello '.$need->user->name,
+                    'body' => 'You have successfully matched with new donation check your notifications',
+                    'url' => route('needs.show', $need->id),
+                    'id' => $need->id,
+                ];
+                break;
+            }
+        }
 
+        if($ch == 0){
+            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. you will receive notification when your Donation is matched');
+        }
+        else{
+            Notification::send($need->user, new NewMatchingNotification ($details));
+            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. your donation is matched with '.$need->user->name. ' check your notifications for more details');
+        }
     }
 
     public function proteins(Request $request){
@@ -276,12 +302,38 @@ class HomeController extends Controller
             'id' => $donation->id,
         ];
 
-        event(new DonationCreated($donation));
+        $needs = Need::where('city_id', $dist->city_id)->get();
 
-        // Notification::send($dist, new NewDonation($details));
+        $ch = 0;
+        foreach($needs as $need) {
+            if($need->status == 'confirmed') {
+                $need->donation_id = $donation->id;
+                $need->status = 'matched';
+                $need->save();
+                
+                $donation->status = 'matched';
+                $donation->save();
+                
+                $ch = 1;
+                
+                $details = [
+                    'head' => 'New Donation',
+                    'greeting' => 'Hello '.$need->user->name,
+                    'body' => 'You have successfully matched with new donation check your notifications',
+                    'url' => route('needs.show', $need->id),
+                    'id' => $need->id,
+                ];
+                break;
+            }
+        }
 
-        return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. Now you have increased your chances to be among Top Donors...');
-
+        if($ch == 0){
+            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. you will receive notification when your Donation is matched');
+        }
+        else{
+            Notification::send($need->user, new NewMatchingNotification ($details));
+            return redirect()->route('dist.donations.index')->with('status', 'Thank you for Donation. your donation is matched with '.$need->user->name. ' check your notifications for more details');
+        }
     }
 
     public function show($id)

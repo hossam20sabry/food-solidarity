@@ -10,18 +10,20 @@
                         <th>ID</th>
                         <td>{{$need->id}}</td>
                     </tr>
+                    @if($need->status == 'matched')
                     <tr>
-                        <th>Name</th>
-                        <td>{{$ben->name}}</td>
+                        <th>Donor</th>
+                        <td>{{$need->donation->dist->name}}</td>
                     </tr>
                     <tr>
                         <th>Email</th>
-                        <td>{{$ben->email}}</td>
+                        <td>{{$need->donation->dist->email}}</td>
                     </tr>
                     <tr>
                         <th>Phone</th>
-                        <td>{{$ben->phone}}</td>
+                        <td>{{$need->donation->dist->phone}}</td>
                     </tr>
+                    @endif
                     <tr>
                         <th>Quantity</th>
                         <td>{{$need->quantity}}</td>

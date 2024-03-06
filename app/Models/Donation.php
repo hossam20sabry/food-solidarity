@@ -28,4 +28,9 @@ class Donation extends Model
     {
         return $this->hasOne(CoockedMeal::class);
     }
+
+    public function need()
+    {
+        return $this->hasOne(Need::class);
+    }
 }

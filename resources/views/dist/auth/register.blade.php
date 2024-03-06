@@ -16,7 +16,7 @@
 
     <form method="POST" action="{{ route('dist.register') }}" id="register">
         @csrf
-        <div class="row my-3 box_shadow p-2">
+        <div class="row my-4 box_shadow p-2 pt-4">
             <div class="col-md-6">
                 <div class="logo p-3">
                     <img src="{{asset('/home/img/2355925.jpg')}}" alt="">
@@ -30,7 +30,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="name" class="form-label" >Name</label>
-                            <input type="text" class="form-control" id="name" name="name" :value="old('name')"  autofocus autocomplete="username" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"  autofocus autocomplete="username" aria-describedby="emailHelp">
                         </div>
                         @error('name')
                         <div class="form-error">
@@ -42,7 +42,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="phone" class="form-label" >Phone</label>
-                            <input type="phone" class="form-control" id="phone" name="phone" :value="old('phone')"  autofocus autocomplete="username" aria-describedby="emailHelp">
+                            <input type="phone" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"  autofocus autocomplete="username" aria-describedby="emailHelp">
                         </div>
                         @error('phone')
                         <div class="form-error">
@@ -57,7 +57,9 @@
                             <select name="dist_auth_type_id" class="form-select">
                                 <option selected disabled>Select Author Type</option>
                                 @foreach ($authorTypes as $type)
-                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                <option value="{{ $type->id }}" {{ old('dist_auth_type_id') == $type->id ? 'selected' : '' }}>
+                                    {{ $type->name }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
@@ -70,11 +72,13 @@
 
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="city_id" class="form-label" >City</label>
+                            <label for="city_id" class="form-label">City</label>
                             <select name="city_id" class="form-select">
                                 <option selected disabled>Select City</option>
                                 @foreach ($cities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                    <option value="{{$city->id}}" {{ old('city_id') == $city->id ? 'selected' : '' }}>
+                                        {{$city->name}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -88,7 +92,7 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <label for="address" class="form-label" >address</label>
-                            <input type="text" class="form-control" id="address" name="address" :value="old('address')">
+                            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">   
                         </div>
                         @error('address')
                         <div class="form-error">
@@ -100,7 +104,7 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <label for="email" class="form-label" >Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" :value="old('email')"  autofocus autocomplete="username" aria-describedby="emailHelp">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}"  autofocus autocomplete="username" aria-describedby="emailHelp">
                         </div>
                         @error('email')
                         <div class="form-error">
@@ -112,7 +116,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"  autocomplete="current-password">
+                            <input type="password" class="form-control" id="password" name="password"   autocomplete="current-password">
                         </div>
                         @error('password')
                         <div class="form-error">
@@ -134,10 +138,17 @@
                     </div>
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success w-100" id="login">Register</button>
+                        <button type="submit" class="btn btn-success w-100 d-flex align-items-center justify-content-center" id="login">
+                            <div class="mainSpinner d-none" id="mainSpinner">
+                                <div class="spinner-border text-light " role="status">
+                                    <span class="sr-only"></span>
+                                </div>
+                            </div>
+                            <span class="m-1 btn_flag">Register</span>
+                        </button>
                         
                         <div class="center mt-2">
-                            <a href="{{ route('dist.login') }}" class="mx-3" >Already have an account?</a>
+                            <a href="{{ route('dist.login') }}" class="mx-3 text-success" >Already have an account?</a>
                         </div>
                     </div>
                 </div>
@@ -152,11 +163,11 @@
 </div>
 
 
-<div class="mainSpinner d-none" id="mainSpinner">
+{{-- <div class="mainSpinner " id="mainSpinner">
     <div class="spinner-border text-primary" role="status">
         <span class="sr-only"></span>
     </div>
-</div>
+</div> --}}
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -167,6 +178,7 @@ crossorigin="anonymous"></script>
     
     $(document).ready(function(){
         $('#login').click(function(){
+            $('.btn_flag').addClass('d-none');
             $('#mainSpinner').removeClass('d-none');
         });
     });

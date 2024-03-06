@@ -2,9 +2,11 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\BroadcastManager;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -58,7 +60,7 @@ class NewRequest extends Notification implements ShouldBroadcast
     }
 
     public function toBroadcast($notifiable){
-        return [
+        return new BroadcastMessage( [
             'greeting' => $this->details['greeting'],
             'head' => $this->details['head'],
             'body' => $this->details['body'],
@@ -66,7 +68,7 @@ class NewRequest extends Notification implements ShouldBroadcast
             'id' => $this->details['id'],
             'icon' => 'help.png',
             'created_at' => now()->diffForHumans(),
-        ];
+        ]);
     }
 
     /**

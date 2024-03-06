@@ -152,9 +152,9 @@
 
     @yield('content')
 
-    <footer class="p-2 bg-body-tertiary text-center">
+    {{-- <footer class="p-2 bg-body-tertiary text-center">
         <p class="mb-0">© 2024 Food Solidarity. All rights reserved.</p>
-    </footer>
+    </footer> --}}
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -166,7 +166,7 @@
 
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.10.0/dist/toastify.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.10.0/dist/toastify.min.js"></script> --}}
 
 
 
@@ -188,25 +188,20 @@
         {
             $guard = 'dist';
             $user = Auth::guard('dist')->user();
-            if(isset($user))
-                $notificationCount = count($user->unreadNotifications);
         }
         else
         {
             $guard = 'web';
             $user = Auth::guard('web')->user();
-            if(isset($user))
-                $notificationCount = count($user->unreadNotifications);
         }
     @endphp
 
     <script>
         const id = "{{ Auth::guard($guard)->id() }}";
-        const notificationCount = @JSON($notificationCount);
     </script>
 
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js']);
 
 </body>
 </html>
