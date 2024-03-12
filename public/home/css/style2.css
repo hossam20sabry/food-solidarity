@@ -176,6 +176,24 @@ body{
 .notification{
     margin: 0px 14px !important;
 }
+
+.notification-text {
+    display: none;
+    color: black;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+.notification:hover .notification-text {
+    display: block;
+}
 @media screen and (max-width: 768px) {
     .table_responsive{
         display: none;
@@ -204,6 +222,20 @@ body{
     }
     .notification{
         margin: 10px 5px !important;
+    }
+
+    .notification-text {
+        display: none;
+        color: black;
+        position: absolute;
+        bottom: -40px;
+        left: 190%;
+        transform: translateX(-50%);
+        background-color: #ffffff;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 999;
     }
     
 }

@@ -16,6 +16,15 @@
         </div>
     </div>
     @endif
+    @if ($errors->any())
+    <div class="row">
+        <div class="col-md-12 box_shadow alert alert-danger ">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </div>
+    </div>
+    @endif
     <div class="row center flex-space-between mx-1">
     
         <div class="col-md-4 box_shadow p-3 my-1">
@@ -29,11 +38,15 @@
             <div class="col-12 border-bottom">
                 <h4>Create Author Type</h4>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-2">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" name="name" class="form-control">
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mt-2">
+                <label for="flag" class="form-label">Type Donor = 0 | Type Beneficiary = 1</label>
+                <input type="number" min="0" max="1" value="0" name="flag" class="form-control">
+            </div>
+            <div class="col-md-4 mt-2 mb-3">
                 <label for="name" class="form-label">_</label>
                 <button type="submit" class="btn btn-primary w-100">Store</button>
             </div>
@@ -49,6 +62,7 @@
             <tr>
                 <th class="table_responsive">id</th>
                 <th>name</th>
+                <th>Type</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -58,6 +72,7 @@
             <tr>
                 <th class="table_responsive">{{$type->id}}</th>
                 <td>{{$type->name}}</td>
+                <td>@if($type->flag == 0) Donor @else Beneficiary @endif</td>
                 <td>
                     <a href="{{ route('admin.authTypes.edit', $type->id)}}">
                         <button class="btn btn-primary">Edit</button>

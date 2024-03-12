@@ -57,15 +57,14 @@ class User extends Authenticatable
         return $this->hasMany(Need::class);
     }
 
-    public function donations()
-    {
-        return $this->hasMany(Donation::class);
-    }
 
     public function city()
     {
         return $this->belongsTo(City::class);
     }
 
-
+    public function complaints()
+    {
+        return $this->hasMany(BenComplaint::class);
+    }
 }

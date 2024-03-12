@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $authorTypes = DistAuthType::all();
+        $authorTypes = AuthType::where('flag', '0')->get();
         $cities = City::all();
         return view('dist.auth.register', compact('authorTypes', 'cities'));
     }
@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
 
         $dist = Dist::create([
             'name' => $request->name,
-            'dist_auth_type_id' => $request->dist_auth_type_id,
+            'auth_type_id' => $request->dist_auth_type_id,
             'email' => $request->email,
             'phone' => $request->phone,
             'city_id' => $request->city_id,

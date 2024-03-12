@@ -111,7 +111,7 @@
             $('#submitContainer').append('<input type="hidden" name="protein_id[]" value="'+id+'">');
             $('#submitContainer').append('<div class="col-12 parent'+id+'"><label for="quantity" class="form-label lapel'+id+'">'+$('.item'+id).text()+' Quantity and Expiry</label></div>');
             $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="number" placeholder="Enter quantity"  data-id="' + id + '" name="quantity[]" min="1" class="form-control mb-1"></div>');
-            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]" min="{{ date('Y-m-d') }}"  data-id="' + id + '" name="expDate[]"  class="form-control mb-3"></div>');
+            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]"  data-id="' + id + '" name="expDate[]"  class="form-control mb-3"></div>');
             mainSpinner.classList.add('d-none');
             $('.item'+id).addClass('active');
         }, 500);

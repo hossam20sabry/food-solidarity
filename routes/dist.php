@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dist\ComplaintsController;
 use App\Http\Controllers\Dist\HomeController as DistHomeController;
 use App\Http\Controllers\Dist\HomeController;
 use App\Http\Controllers\Dist\ProfileController as DistProfileController;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dist')->name('dist.')->group(function () {
 
     Route::middleware('dist')->group(function () {
+
+        
         
         Route::get('/', [HomeController::class, 'index'])->name('index');
         Route::get('notifications', [DistHomeController::class, 'notifications'])->name('notifications');
@@ -37,6 +40,11 @@ Route::prefix('dist')->name('dist.')->group(function () {
             Route::post('/notifications', [DistHomeController::class, 'notifications'])->name('notifications');
             Route::post('/selectItem', [DistHomeController::class, 'selectItem'])->name('selectItem');
             Route::post('/dry-food', [DistHomeController::class, 'dryFood'])->name('dryFood');
+        });
+
+        Route::prefix('complaints')->name('complaints.')->group(function () {
+            Route::get('/create', [ComplaintsController::class, 'create'])->name('create');
+            Route::post('/store', [ComplaintsController::class, 'store'])->name('store');
         });
 
         

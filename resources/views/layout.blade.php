@@ -35,11 +35,17 @@
                     <li class="nav-item">
                         <a href="{{ route('dist.donations.index')}}" class="nav-link text-capitalize">Donations</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('dist.complaints.create')}}" class="nav-link text-capitalize">Contact Us</a>
+                    </li>
                     @endif
 
                     @if(Auth::guard('web')->check())
                     <li class="nav-item">
-                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Requests</a>
+                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Needs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('complaints.create')}}" class="nav-link text-capitalize">Contact Us</a>
                     </li>
                     @endif
                     
@@ -48,11 +54,11 @@
                 
                 @if(Auth::guard('dist')->check())
                 <a  href="{{ route('dist.notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
-
                     <i class="fas fa-bell" style="font-size: 25px;color: black;"></i>
                     @if(count(Auth::guard('dist')->user()->unreadNotifications) > 0)
                     <span class="badge badge_style" id="counter">{{ count(Auth::guard('dist')->user()->unreadNotifications) }}</span>
                     @endif
+                    <span class="notification-text">Notifications</span>
                 </a>
                 <div class="nav-item dropdown">
 
@@ -78,11 +84,11 @@
                     @auth
                     @if(Auth::guard('web')->check())
                     <a  href="{{ route('notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
-
                         <i class="fas fa-bell" style="font-size: 25px; color: black;"></i>
                         @if(count(Auth::guard('web')->user()->unreadNotifications) > 0)
                         <span class="badge badge_style" id="counter">{{ count(Auth::guard('web')->user()->unreadNotifications) }}</span>
                         @endif
+                        <span class="notification-text">Notifications</span>
                     </a>
                     @endif
                     <div class="nav-item dropdown">

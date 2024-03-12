@@ -22,7 +22,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $authorTypes = AuthType::all();
+        $authorTypes = AuthType::where('flag', '1')->get();
         $cities = City::all();
         return view('auth.register', compact('authorTypes', 'cities'));
     }
