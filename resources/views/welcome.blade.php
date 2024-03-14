@@ -26,14 +26,14 @@
         <h1 class="color-green mb-4 border-bottom py-2">Top Donors</h1>
         <table class="table table-light  table-striped">
             <tr>
-                <th style="max-width: 70px; overflow: scroll">Name</th>
-                <th style="max-width: 100px; overflow: scroll">Email</th>
+                <th style="max-width: 70px; overflow-x: scroll">Name</th>
+                <th style="max-width: 100px; overflow-x: scroll">Email</th>
                 <th>Total Quantity</th>
             </tr>
             @foreach($topDonors as $topDonor)
             <tr>
-                <td style="max-width: 70px; overflow: scroll">{{$topDonor->name}}</td>
-                <td style="max-width: 100px; overflow: scroll">{{$topDonor->email}}</td>
+                <td style="max-width: 70px; overflow-x: scroll">{{$topDonor->name}}</td>
+                <td style="max-width: 100px; overflow-x: scroll">{{$topDonor->email}}</td>
                 <td>
                     @php
                         $totalQuantity = 0;

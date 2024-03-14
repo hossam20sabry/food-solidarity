@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('dist')->name('dist.')->group(function () {
+Route::prefix('donor')->name('dist.')->group(function () {
 
     Route::middleware('dist')->group(function () {
-
-        
         
         Route::get('/', [HomeController::class, 'index'])->name('index');
         Route::get('notifications', [DistHomeController::class, 'notifications'])->name('notifications');

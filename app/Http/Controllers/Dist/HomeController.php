@@ -208,9 +208,9 @@ class HomeController extends Controller
                     'id' => $need->id,
                 ];
                 $details1 = [
-                    'head' => 'New Donation',
+                    'head' => 'New Mathced Donation',
                     'greeting' => 'Hello '.$donation->dist->name,
-                    'body' => 'You have successfully created new Donation',
+                    'body' => 'Your Donation is matched with '.$need->user->name,
                     'url' => route('dist.donations.show', $donation->id),
                     'id' => $donation->id,
                 ];
@@ -241,13 +241,6 @@ class HomeController extends Controller
                 
                 $ch2++;
                 
-                $details = [
-                    'head' => 'New Donation',
-                    'greeting' => 'Hello '.$need->user->name,
-                    'body' => 'You have successfully matched with new donation check your notification',
-                    'url' => route('needs.show', $need->id),
-                    'id' => $need->id,
-                ];
                 break;
             }
         }
@@ -264,9 +257,9 @@ class HomeController extends Controller
                 'id' => $need->id,
             ];
             $details1 = [
-                'head' => 'New Donation',
+                'head' => 'New Mathced Donation',
                 'greeting' => 'Hello '.$donation->dist->name,
-                'body' => 'You have successfully created new Donation',
+                'body' => 'Your Donation is matched with '.$need->user->name,
                 'url' => route('dist.donations.show', $donation->id),
                 'id' => $donation->id,
             ];
@@ -362,9 +355,9 @@ class HomeController extends Controller
                     'id' => $need->id,
                 ];
                 $details1 = [
-                    'head' => 'New Donation',
+                    'head' => 'New Mathced Donation',
                     'greeting' => 'Hello '.$donation->dist->name,
-                    'body' => 'You have successfully created new Donation',
+                    'body' => 'Your Donation is matched with '.$need->user->name,
                     'url' => route('dist.donations.show', $donation->id),
                     'id' => $donation->id,
                 ];
@@ -392,13 +385,6 @@ class HomeController extends Controller
                 
                 $ch = 1;
                 
-                $details = [
-                    'head' => 'New Donation',
-                    'greeting' => 'Hello '.$need->user->name,
-                    'body' => 'You have successfully matched with new donation check your notifications',
-                    'url' => route('needs.show', $need->id),
-                    'id' => $need->id,
-                ];
                 break;
             }
         }
@@ -416,9 +402,9 @@ class HomeController extends Controller
                 'id' => $need->id,
             ];
             $details1 = [
-                'head' => 'New Donation',
+                'head' => 'New Mathced Donation',
                 'greeting' => 'Hello '.$donation->dist->name,
-                'body' => 'You have successfully created new Donation',
+                'body' => 'Your Donation is matched with '.$need->user->name,
                 'url' => route('dist.donations.show', $donation->id),
                 'id' => $donation->id,
             ];
@@ -549,9 +535,9 @@ class HomeController extends Controller
                     'id' => $need->id,
                 ];
                 $details1 = [
-                    'head' => 'New Donation',
+                    'head' => 'New Mathced Donation',
                     'greeting' => 'Hello '.$donation->dist->name,
-                    'body' => 'You have successfully created new Donation',
+                    'body' => 'Your Donation is matched with '.$need->user->name,
                     'url' => route('dist.donations.show', $donation->id),
                     'id' => $donation->id,
                 ];
@@ -578,13 +564,7 @@ class HomeController extends Controller
                 
                 $ch = 1;
                 
-                $details = [
-                    'head' => 'New Donation',
-                    'greeting' => 'Hello '.$need->user->name,
-                    'body' => 'You have successfully matched with new donation check your notification',
-                    'url' => route('needs.show', $need->id),
-                    'id' => $need->id,
-                ];
+                
                 break;
             }
         }
@@ -601,9 +581,9 @@ class HomeController extends Controller
                 'id' => $need->id,
             ];
             $details1 = [
-                'head' => 'New Donation',
+                'head' => 'New Mathced Donation',
                 'greeting' => 'Hello '.$donation->dist->name,
-                'body' => 'You have successfully created new Donation',
+                'body' => 'Your Donation is matched with '.$need->user->name,
                 'url' => route('dist.donations.show', $donation->id),
                 'id' => $donation->id,
             ];
