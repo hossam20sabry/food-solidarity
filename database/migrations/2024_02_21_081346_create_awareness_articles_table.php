@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('awareness_articles', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
+            $table->text('text');
             $table->string('img');
+            $table->boolean('explore')->default(0);
             $table->timestamps();
         });
     }

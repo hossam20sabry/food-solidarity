@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dists', function (Blueprint $table) {
-            $table->unsignedBigInteger('auth_type_id');
-            $table->foreign('auth_type_id')->references('id')->on('auth_types');
+        Schema::table('donations', function (Blueprint $table) {
+            $table->string('donation_type')->nullable()->change();
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dists', function (Blueprint $table) {
-            //
+        Schema::table('donations', function (Blueprint $table) {
+            $table->string('donation_type')->nullable(false)->change();
         });
     }
 };

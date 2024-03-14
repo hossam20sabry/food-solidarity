@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('auth_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('flag')->default(0); // 0 = donor, 
             $table->timestamps();
         });
     }

@@ -142,6 +142,7 @@
         </div>
 
     </div>
+    @if($topDonors->count() > 0)
     <div class="row">
         <h4 class="text-green border-bottom p-1">Top Donors</h4>
         <table class="table table-secondary">
@@ -171,5 +172,6 @@
             </tbody>
         </table>
     </div>
+    @endif
 </div>
 @endsection

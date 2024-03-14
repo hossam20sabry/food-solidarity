@@ -38,7 +38,7 @@
                     {{ $displayName }}
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li>
+                    {{-- <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li> --}}
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">log out</button>

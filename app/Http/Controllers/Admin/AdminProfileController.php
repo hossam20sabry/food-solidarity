@@ -24,6 +24,7 @@ class AdminProfileController extends Controller
 
     public function update(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::guard('admin')->user()->id],
