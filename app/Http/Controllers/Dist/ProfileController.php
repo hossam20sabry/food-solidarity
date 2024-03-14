@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dist;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 use App\Models\Dist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,10 @@ class ProfileController extends Controller
     public function edit(Request $request)
     {
         $dist = Auth::guard('dist')->user();
+        $cities = City::all();
         return view('dist.profile.edit', [
             'user' => $dist,
+            'cities' => $cities
         ]);
     }
 
@@ -24,6 +27,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::guard('dist')->user()->id, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'city_id' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
         ]);
 
         $dist = Dist::find(Auth::guard('dist')->user()->id);

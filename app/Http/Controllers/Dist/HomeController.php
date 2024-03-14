@@ -312,6 +312,16 @@ class HomeController extends Controller
         
         $dist = auth()->guard('dist')->user();
 
+        $details = [
+            'head' => 'New Donation',
+            'greeting' => 'Hello '.$dist->name,
+            'body' => 'You have successfully created new Donation',
+            'url' => route('dist.donations.show', $donation->id),
+            'id' => $donation->id,
+        ];
+
+        Notification::send($dist, new NewDonation($details));
+
         $needs = Need::where('city_id', $dist->city_id)->get();
 
         if( $donation->target == 'farm'){

@@ -14,53 +14,40 @@
                         individuals to extend a helping hand to those who have no food.</p>
                 </div>
                 @if(Auth::guard('web')->guest() && Auth::guard('dist')->guest())
-                    <a href="{{ route('select.register')}}" class="btn btn-success">Get Started</a>
+                    <a href="{{ route('select.register')}}" class="btn btn-success my-3">Get Started</a>
                 @endif
             </div>
         </div>
         <img src="{{asset('/home/img/mainBackgound.png')}}" alt="background"  style="height: 100vh; width: 100%">
     </div>
 
+    @if(isset($topDonors) && $topDonors->count() > 0)
     <div class="container mt-5">
         <h1 class="color-green mb-4 border-bottom py-2">Top Donors</h1>
         <table class="table table-light  table-striped">
             <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
+                <th style="max-width: 70px; overflow: scroll">Name</th>
+                <th style="max-width: 100px; overflow: scroll">Email</th>
+                <th>Total Quantity</th>
             </tr>
+            @foreach($topDonors as $topDonor)
             <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
+                <td style="max-width: 70px; overflow: scroll">{{$topDonor->name}}</td>
+                <td style="max-width: 100px; overflow: scroll">{{$topDonor->email}}</td>
+                <td>
+                    @php
+                        $totalQuantity = 0;
+                        foreach ($topDonor->donations as $donation) {
+                            $totalQuantity += $donation->quantity;
+                        }
+                    @endphp
+                    {{ $totalQuantity }}
+                </td>
             </tr>
-            <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
-            </tr>
-            <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
-            </tr>
-            <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
-            </tr>
-            <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
-            </tr>
-            <tr>
-                <td>name</td>
-                <td>email</td>
-                <td>donations</td>
-            </tr>
+            @endforeach
         </table>
     </div>
+    @endif
 
     @if(isset($article))
     <div class="container mt-5">

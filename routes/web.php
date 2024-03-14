@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+
 
 Route::middleware('guest:admin,dist,web')->group(function () {
     Route::get('select-Auth-login', [SelectAuthController::class, 'login'])->name('select.login');

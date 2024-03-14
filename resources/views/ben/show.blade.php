@@ -76,7 +76,7 @@
                 </table>
             </div>
 
-            <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size">
+            <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size img_res">
         </div>
     </div>
 @endsection

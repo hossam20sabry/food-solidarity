@@ -21,7 +21,20 @@
                     </div>
                     @enderror
                 </div>
-
+                <div class="mb-3">
+                    <label for="city_id">City</label>
+                    <select name="city_id" class="form-control" id="">
+                        @foreach ($cities as $city)
+                            <option @if($city->id == $user->city_id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('city_id')
+                    <div class="form-error">
+                        <p class="text-danger mb-3">{{$message}}</p>
+                    </div>
+                    @enderror
+                </div>
+                
                 <div class="mb-3">
                     <label for="email">Email</label>
                     <input type="email" name="email" value="{{ old('email', $user->email) }}" class="form-control">
