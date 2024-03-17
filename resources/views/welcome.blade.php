@@ -53,7 +53,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-6">                        
-                <p>{{$article->text}}</p>
+                <p id="textFilter">{!! str_replace('s1p1a1ce', '<br>', $article->text) !!}</p>
             </div>
             <div class="col-sm-6 mb-5">
                 <div class="row">

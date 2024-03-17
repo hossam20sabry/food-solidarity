@@ -90,10 +90,10 @@
     
                         <div class="col-12">
                             <div class="mb-3">
-                                <label for="address" class="form-label" >address</label>
-                                <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">   
+                                <label for="location_link" class="form-label" >Location link</label>
+                                <input type="text" class="form-control" id="location_link" name="location_link" value="{{ old('location_link') }}">   
                             </div>
-                            @error('address')
+                            @error('location_link')
                             <div class="form-error">
                                 <p class="text-danger mb-3">{{$message}}</p>
                             </div>

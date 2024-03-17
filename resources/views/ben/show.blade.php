@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row min-height d-flex flex-column justify-content-center align-items-center" style="position: relative;">
+        <div class="row min-height d-flex justify-content-center align-items-center" style="position: relative;">
             <div class="col-md-6">
                 <h3 class="text-success">Request Details</h3>
                 <table class="table table-light">
@@ -30,6 +30,10 @@
                     <tr>
                         <th>Phone</th>
                         <td>{{$need->donation->dist->phone}}</td>
+                    </tr>
+                    <tr>
+                        <th>Donor Location</th>
+                        <td><a href="{{$need->donation->dist->location_link}}" target="_blank">{{$need->donation->dist->location_link}}</a></td>
                     </tr>
                     @endif
                     <tr>
@@ -75,6 +79,13 @@
                     @endif
                 </table>
             </div>
+            {{-- <div class="col-md-6">
+                <h3 class="text-success">Donor location</h3>
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13828.691426885103!2d31.249323718676745!3d29.945706216951066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145847fdb554b405%3A0x8b51139c313d8043!2sTaracina%20Wedding%20on%20the%20Nile!5e0!3m2!1sar!2seg!4v1710628994325!5m2!1sar!2seg" 
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div> --}}
 
             <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size img_res">
         </div>

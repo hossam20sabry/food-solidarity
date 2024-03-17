@@ -23,7 +23,7 @@
             <div class="col-12 border-bottom">
                 <h4>Create Article</h4>
             </div>
-            <label for="name" class="form-label">Text</label>
+            <label for="name" class="form-label">Text <span class="text-danger">if you want to make space write "s1p1a1ce" </span</label>
             <div class="col-md-12">
                 <textarea name="text" id="" rows="10" class="p-2" style="width: 100%"></textarea>
             </div>

@@ -27,6 +27,10 @@
                         <th>Phone</th>
                         <td>{{$donation->need->user->phone}}</td>
                     </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td><a href="{{$donation->need->user->location_link}}" target="_blank">{{$donation->need->user->location_link}}</a></td>
+                    </tr>
                     @endif
                     <tr>
                         <th>Quantity</th>
