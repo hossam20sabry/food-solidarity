@@ -29,7 +29,7 @@
                     </tr>
                     <tr>
                         <th>Location</th>
-                        <td><a href="{{$donation->need->user->location_link}}" target="_blank">{{$donation->need->user->location_link}}</a></td>
+                        <td><a href="{{$donation->need->user->location_link}}" class="btn btn-success" target="_blank">google maps</a></td>
                     </tr>
                     @endif
                     <tr>

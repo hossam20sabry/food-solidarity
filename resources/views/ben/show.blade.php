@@ -23,17 +23,14 @@
                         <th>Email</th>
                         <td>{{$need->donation->dist->email}}</td>
                     </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td>{{$need->donation->dist->address}}</td>
-                    </tr>
+                    
                     <tr>
                         <th>Phone</th>
                         <td>{{$need->donation->dist->phone}}</td>
                     </tr>
                     <tr>
                         <th>Donor Location</th>
-                        <td><a href="{{$need->donation->dist->location_link}}" target="_blank">{{$need->donation->dist->location_link}}</a></td>
+                        <td ><a href="{{$need->donation->dist->location_link}}" class="btn btn-success" target="_blank">google maps</a></td>
                     </tr>
                     @endif
                     <tr>
