@@ -18,13 +18,11 @@ class AuthTypesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'flag' => 'required|in:0,1'
+            'name' => 'required'
         ]);
 
         $authType = new AuthType();
         $authType->name = $request->name;
-        $authType->flag = $request->flag;
         $authType->save();
 
         return redirect()->route('admin.authTypes.index')->with('success', 'Auth Type created successfully');
@@ -39,13 +37,11 @@ class AuthTypesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'flag' => 'required|in:0,1'
+            'name' => 'required'
         ]);
 
         $authType = AuthType::find($id);
         $authType->name = $request->name;
-        $authType->flag = $request->flag;
         $authType->save();
 
         return redirect()->route('admin.authTypes.index')->with('status', 'Auth Type updated successfully');
@@ -53,13 +49,9 @@ class AuthTypesController extends Controller
 
     public function destroy($id)
     {
-        try {
-            $authType = AuthType::find($id);
-            $authType->delete();
-            return redirect()->route('admin.authTypes.index')->with('status', 'Auth Type deleted successfully');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.authTypes.index')->with('error', 'Auth Type cannot be deleted');
-        }
+        $authType = AuthType::find($id);
+        $authType->delete();
+        return redirect()->route('admin.authTypes.index')->with('status', 'Auth Type deleted successfully');
     }
 
     

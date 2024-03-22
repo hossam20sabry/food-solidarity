@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Ben;
 
 use App\Http\Controllers\Controller;
-use App\Models\Donation;
 use App\Models\Need;
-use App\Notifications\NewMatchingNotification;
-use App\Notifications\NewMatchingNotificationDonor;
 use App\Notifications\NewRequest;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Events\BroadcastNotificationCreated;
@@ -44,6 +41,9 @@ class HomeController extends Controller
         }
         //end validation
 
+        if($user->authType->name == 'individual' && $request->qty > 10){
+            return redirect()->back()->with('error', 'Maxmimum quantity is 10');
+        }
 
         
         $need = Need::create([
@@ -63,107 +63,9 @@ class HomeController extends Controller
         ];
 
         Notification::send($user, new NewRequest($details));
-
-        $donations = Donation::where('city_id', $user->city_id)->get();
-
-
-        //Farm
-        if($user->authType->name == 'Farms'){
-            $ch1 =0;
-            foreach($donations as $donation){
-                $donationPlus10 = $donation->quantity + ($donation->quantity * 10/100);
-                $donationMinus10 =  $donation->quantity - ($donation->quantity * 10/100);
-                if($donation->status == 'confirmed' && 
-                $donationMinus10 <= $request->qty && 
-                $donationPlus10 >= $request->qty &&
-                $donation->donation_type == $request->type &&
-                $donation->target == "farm")
-                {
-                    $need->donation_id = $donation->id;
-                    $need->status = 'matched';
-                    $need->matched_at = now();
-                    $need->save();
-
-                    $donation->status = 'matched';
-                    $donation->matched_at = now();
-                    $donation->save();
-
-                    $ch1 = 1;
-                    
-                    
-                    break;
-                }
-            }
-            
-            
-            if($ch1 == 0){
-                return redirect()->back()->with('status', 'Your Needs created successfully. you will receive notification when your Need is matched');
-            }
-            else{
-                $details1 = [
-                    'head' => 'New Mathced Donation',
-                    'greeting' => 'Hello '.$donation->dist->name,
-                    'body' => 'Your Donation is matched with '.$need->user->name,
-                    'url' => route('dist.donations.show', $donation->id),
-                    'id' => $donation->id,
-                ];
-                Notification::send($need->user, new NewMatchingNotification ($details));
-                Notification::send($donation->dist, new NewMatchingNotificationDonor ($details1));
-                return redirect()->back()->with('status', 'congrats. your Request is matched with '.$need->donation->dist->name. ' check your notifications for more details');
-            }
-        }
-
-
-        // Charity
-        $ch =0;
-        foreach($donations as $donation){
-            $donationPlus10 = $donation->quantity + ($donation->quantity * 10/100);
-            $donationMinus10 =  $donation->quantity - ($donation->quantity * 10/100);
-            if($donation->status == 'confirmed' && 
-            $donationMinus10 <= $request->qty && 
-            $donationPlus10 >= $request->qty && 
-            $donation->donation_type == $request->type){
-                $need->donation_id = $donation->id;
-                $need->status = 'matched';
-                $need->matched_at = now();
-                $need->save();
-
-                $donation->status = 'matched';
-                $donation->matched_at = now();
-                $donation->save();
-
-                $ch = 1;
-                
-                $details = [
-                    'head' => 'New Donation',
-                    'greeting' => 'Hello '.$need->user->name,
-                    'body' => 'You have successfully matched with new donation check your notification',
-                    'url' => route('needs.show', $need->id),
-                    'id' => $need->id,
-                ];
-
-                
-                break;
-            }
-        }
         
-        
-        if($ch == 0){
-            return redirect()->back()->with('status', 'Your Needs created successfully. you will receive notification when your Need is matched');
-        }
-        else{
-            $details1 = [
-                'head' => 'New Mathced Donation',
-                'greeting' => 'Hello '.$donation->dist->name,
-                'body' => 'Your Donation is matched with '.$need->user->name,
-                'url' => route('dist.donations.show', $donation->id),
-                'id' => $donation->id,
-            ];
-            Notification::send($need->user, new NewMatchingNotification ($details));
-            Notification::send($donation->dist, new NewMatchingNotificationDonor ($details1));
-            return redirect()->back()->with('status', 'congrats. your Request is matched with '.$need->donation->dist->name. ' check your notifications for more details');
-        }
 
+        return redirect()->back()->with('status', 'Needs created successfully');
 
     }
 

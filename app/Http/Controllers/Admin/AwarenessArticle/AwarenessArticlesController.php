@@ -22,7 +22,7 @@ class AwarenessArticlesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'text' => 'required|not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i',
+            'text' => 'required',
             'img' => 'required',
         ]);
 

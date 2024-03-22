@@ -79,7 +79,7 @@
                     <td>@if($need->donation_type_id == 1) Dry @elseif($need->donation_type_id == 2) Cooked Meals @elseif($need->donation_type_id == 3) Proteins @endif</td>
                     <td class="table_responsive">{{$need->quantity}}</td>
                     <td class="table_responsive text-uppercase text-success">{{$need->status}}</td>
-                    <td class="table_responsive">{{$need->created_at->toDayDateTimeString()}}</td>
+                    <td class="table_responsive">{{$need->created_at}}</td>
                     <td>
                         <a href="{{ route('needs.show', $need->id)}}">
                             <button class="btn btn-success">Details</button>

@@ -35,32 +35,24 @@
                     <li class="nav-item">
                         <a href="{{ route('dist.donations.index')}}" class="nav-link text-capitalize">Donations</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dist.complaints.create')}}" class="nav-link text-capitalize">Contact Us</a>
-                    </li>
                     @endif
 
                     @if(Auth::guard('web')->check())
                     <li class="nav-item">
-                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Needs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('complaints.create')}}" class="nav-link text-capitalize">Contact Us</a>
+                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize">Requests</a>
                     </li>
                     @endif
-                    <li class="nav-item">
-                        <a href="{{ route('about')}}" class="nav-link text-capitalize">About Us</a>
-                    </li>
+                    
                 </ul>
 
                 
                 @if(Auth::guard('dist')->check())
                 <a  href="{{ route('dist.notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
+
                     <i class="fas fa-bell" style="font-size: 25px;color: black;"></i>
                     @if(count(Auth::guard('dist')->user()->unreadNotifications) > 0)
                     <span class="badge badge_style" id="counter">{{ count(Auth::guard('dist')->user()->unreadNotifications) }}</span>
                     @endif
-                    <span class="notification-text">Notifications</span>
                 </a>
                 <div class="nav-item dropdown">
 
@@ -86,11 +78,11 @@
                     @auth
                     @if(Auth::guard('web')->check())
                     <a  href="{{ route('notifications') }}" class="notification mx-3" style="position: relative; cursor: pointer !important;display: inline-block;">
+
                         <i class="fas fa-bell" style="font-size: 25px; color: black;"></i>
                         @if(count(Auth::guard('web')->user()->unreadNotifications) > 0)
                         <span class="badge badge_style" id="counter">{{ count(Auth::guard('web')->user()->unreadNotifications) }}</span>
                         @endif
-                        <span class="notification-text">Notifications</span>
                     </a>
                     @endif
                     <div class="nav-item dropdown">
@@ -160,41 +152,9 @@
 
     @yield('content')
 
-    <footer class="p-2 footer-bg">
-        <div class="container">
-            <div class="text-center">
-                <p class="mb-0 text-res">© 2024 Food Solidarity. All rights reserved.</p>
-            </div>
-            <ul>
-                {{-- <li><a class="text-decoration-none text-dark" href="">Privacy</a></li>
-                <li><a class="text-decoration-none text-dark" href="">Terms</a></li>
-                <li><a class="text-decoration-none text-dark" href="">Contact</a></li> --}}
-
-                @if(Auth::guard('dist')->check())
-                    <li class="nav-item">
-                        <a href="{{ route('dist.donations.index')}}" class="nav-link text-capitalize text-res">Donations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('dist.complaints.create')}}" class="nav-link text-capitalize text-res">Contact Us</a>
-                    </li>
-                @endif
-
-                @if(Auth::guard('web')->check())
-                    <li class="nav-item">
-                        <a href="{{ route('needs.index')}}" class="nav-link text-capitalize text-res">Needs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('complaints.create')}}" class="nav-link text-capitalize text-res">Contact Us</a>
-                    </li>
-                @endif
-                <li class="nav-item">
-                    <a href="{{ route('about')}}" class="nav-link text-capitalize text-res">About Us</a>
-                </li>
-            </ul>
-
-
-        </div>
-    </footer>
+    {{-- <footer class="p-2 bg-body-tertiary text-center">
+        <p class="mb-0">© 2024 Food Solidarity. All rights reserved.</p>
+    </footer> --}}
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -241,7 +201,7 @@
     </script>
 
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js']);
 
 </body>
 </html>

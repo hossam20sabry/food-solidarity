@@ -20,11 +20,9 @@
                         <div class="col-sm-9">
                             <p class="text-muted"><span style="font-weight: bold">{{$notification->data['greeting']}}</span> . {{$notification->data['body']}}</p>
                         </div>
-                        @if(isset($notification->data['url']))
                         <div class="col-sm-3 d-flex justify-content-end">
                             <a href="{{$notification->data['url']}}?notification_id={{$notification->id}}" class="btn @if (!$notification->read_at) btn-success @else btn-light @endif">Get Details</a>
                         </div>
-                        @endif
                     </div>
                 </div>
                 @endforeach

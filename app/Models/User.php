@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'location_link',
+        'address',
         'city_id',
         'auth_type_id',
         'password',
@@ -57,14 +57,15 @@ class User extends Authenticatable
         return $this->hasMany(Need::class);
     }
 
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 
     public function city()
     {
         return $this->belongsTo(City::class);
     }
 
-    public function complaints()
-    {
-        return $this->hasMany(BenComplaint::class);
-    }
+
 }

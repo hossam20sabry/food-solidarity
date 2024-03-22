@@ -44,7 +44,7 @@
         </div>
 
 
-        <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size img_res">
+        <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size">
     </div>
 </div>
 @endsection

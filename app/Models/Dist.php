@@ -16,9 +16,9 @@ class Dist extends Authenticatable
         'name',
         'email',
         'phone',
+        'address',
         'city_id',
-        'location_link',
-        'auth_type_id',
+        'dist_auth_type_id',
         'password',
     ];
 
@@ -49,16 +49,11 @@ class Dist extends Authenticatable
 
     public function authType()
     {
-        return $this->belongsTo(AuthType::class);
+        return $this->belongsTo(DistAuthType::class);
     }
 
     public function city()
     {
         return $this->belongsTo(City::class);
-    }
-
-    public function complaints()
-    {
-        return $this->hasMany(DonorComplaint::class);
     }
 }

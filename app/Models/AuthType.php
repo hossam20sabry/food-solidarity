@@ -9,14 +9,9 @@ class AuthType extends Model
 {
     use HasFactory;
 
-    public function users()
+    public function user()
     {
         return $this->hasMany(User::class);
-    }
-
-    public function donors()
-    {
-        return $this->hasMany(Dist::class);
     }
 
 }

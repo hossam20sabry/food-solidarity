@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('/home/css/login.css')}}">
     <link rel="icon" href="{{asset('/home/img/logo 102.png')}}">
-    <title>Regester</title>
+    <title>register</title>
 </head>
 <body>
 <div class="container mt-3 min_height">
@@ -91,10 +91,10 @@
 
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="location_link" class="form-label" >Location link</label>
-                            <input type="text" class="form-control" id="location_link" name="location_link" value="{{ old('location_link') }}">   
+                            <label for="address" class="form-label" >address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">   
                         </div>
-                        @error('location_link')
+                        @error('address')
                         <div class="form-error">
                             <p class="text-danger mb-3">{{$message}}</p>
                         </div>
@@ -161,6 +161,13 @@
 
 
 </div>
+
+
+{{-- <div class="mainSpinner " id="mainSpinner">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
+</div> --}}
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

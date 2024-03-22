@@ -23,11 +23,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">       
                 <a href="{{ route('admin.index') }}" class="nav-link text-capitalize border-start">Admins</a>            
                 <a href="{{ route('admin.cities.index') }}" class="nav-link text-capitalize border-start">Cites</a>            
-                <a href="{{ route('admin.authTypes.index') }}" class="nav-link text-capitalize border-start">Authors</a>         
-                <a href="{{ route('admin.FoodTypes.index') }}" class="nav-link text-capitalize border-start">Food</a>            
+                <a href="{{ route('admin.authTypes.index') }}" class="nav-link text-capitalize border-start">Ben Authors</a>         
+                <a href="{{ route('admin.distAuthTypes.index') }}" class="nav-link text-capitalize border-start">Dist Authors</a>         
+                <a href="{{ route('admin.dryFoodTypes.index') }}" class="nav-link text-capitalize border-start">Dry Foods </a>            
                 <a href="{{ route('admin.awarenessArticles.index') }}" class="nav-link text-capitalize border-start">Awarness Articles</a>            
-                <a href="{{ route('admin.benAnswersComplains.index') }}" class="nav-link text-capitalize border-start">Beneficiaries Complaints</a>            
-                <a href="{{ route('admin.answersComplains.index') }}" class="nav-link text-capitalize border-start">Donors Complaints</a>            
+                <a href="{{ route('admin.proteinTypes.index') }}" class="nav-link text-capitalize border-start">Proteins</a>            
             </ul>
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-capitalize nav_item text-center box_shadow" style="color: black !important" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,7 @@
                     {{ $displayName }}
                 </a>
                 <ul class="dropdown-menu">
-                    {{-- <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li> --}}
+                    <li><a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Profile</a></li>
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">log out</button>

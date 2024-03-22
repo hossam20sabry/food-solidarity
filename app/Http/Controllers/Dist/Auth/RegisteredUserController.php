@@ -25,7 +25,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $authorTypes = AuthType::where('flag', '0')->get();
+        $authorTypes = DistAuthType::all();
         $cities = City::all();
         return view('dist.auth.register', compact('authorTypes', 'cities'));
     }
@@ -41,22 +41,21 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'city_id' => ['required'],
             'dist_auth_type_id' => ['required', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
+            'address' => ['required', 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.Dist::class, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'phone' => ['required', 'string', 'max:255', 'unique:'.Dist::class, 'not_regex:/<\s*script|<\s*\/script\s*>|<\s*html|<\s*\/html\s*>/i'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'location_link' => ['required', 'string'],
         ]);
 
         $dist = Dist::create([
             'name' => $request->name,
-            'auth_type_id' => $request->dist_auth_type_id,
+            'dist_auth_type_id' => $request->dist_auth_type_id,
             'email' => $request->email,
             'phone' => $request->phone,
             'city_id' => $request->city_id,
-            'location_link' => $request->location_link,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
-
 
         event(new Registered($dist));
 

@@ -24,7 +24,7 @@
                 <hr class="text-muted">
                 <div class="mb-3">
                     <label for="email" class="form-label" >Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}"  autofocus autocomplete="username" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" name="email" :value="old('email')"  autofocus autocomplete="username" aria-describedby="emailHelp">
                     @error('email')
                     <div class="form-error">
                         <p class="text-danger mb-3">{{$message}}</p>
@@ -50,7 +50,7 @@
                 
                 <div class="center mt-2">
                     @if (Route::has('dist.password.request'))
-                        <a class="underline text-success text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        <a class="underline text-success text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('dist.password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif

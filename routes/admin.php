@@ -1,16 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\Admin\AnswerComplainsController;
 use App\Http\Controllers\Admin\AuthType\AuthTypesController;
 use App\Http\Controllers\Admin\AuthType\DistAuthTypesController;
 use App\Http\Controllers\Admin\AwarenessArticle\AwarenessArticlesController;
-use App\Http\Controllers\Admin\BenAnswerComplainsController;
 use App\Http\Controllers\Admin\City\CitiesController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DonationType\DonationTypesController;
 use App\Http\Controllers\Admin\DryFoodType\DryFoodTypesController;
-use App\Http\Controllers\Admin\FoodType\FoodTypesController;
 use App\Http\Controllers\Admin\ProteinTypes\ProteinTypesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +26,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('admin')->group(function () {
         
-        Route::get('/dashboard', [DashboardController::class, 'index'])
+        Route::get('/dashboard', function () { return view('admin.dashboard');})
             ->name('dashboard');
 
         Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
@@ -45,15 +41,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/{authType}', [AuthTypesController::class, 'destroy'])->name('destroy');
         });
 
-
-        Route::prefix('FoodTypes')->name('FoodTypes.')->group(function () {
-            Route::get('/', [FoodTypesController::class, 'index'])->name('index');
-            Route::post('/', [FoodTypesController::class, 'store'])->name('store');
-            Route::get('/{dryFoodType}/edit', [FoodTypesController::class, 'edit'])->name('edit');
-            Route::patch('/{dryFoodType}', [FoodTypesController::class, 'update'])->name('update');
-            Route::delete('/{dryFoodType}', [FoodTypesController::class, 'destroy'])->name('destroy');
+        Route::prefix('distAuthTypes')->name('distAuthTypes.')->group(function () {
+            Route::get('/', [DistAuthTypesController::class, 'index'])->name('index');
+            Route::post('/', [DistAuthTypesController::class, 'store'])->name('store');
+            Route::get('/{authType}/edit', [DistAuthTypesController::class, 'edit'])->name('edit');
+            Route::patch('/{authType}', [DistAuthTypesController::class, 'update'])->name('update');
+            Route::delete('/{authType}', [DistAuthTypesController::class, 'destroy'])->name('destroy');
         });
 
+
+        Route::prefix('dryFoodTypes')->name('dryFoodTypes.')->group(function () {
+            Route::get('/', [DryFoodTypesController::class, 'index'])->name('index');
+            Route::post('/', [DryFoodTypesController::class, 'store'])->name('store');
+            Route::get('/{dryFoodType}/edit', [DryFoodTypesController::class, 'edit'])->name('edit');
+            Route::patch('/{dryFoodType}', [DryFoodTypesController::class, 'update'])->name('update');
+            Route::delete('/{dryFoodType}', [DryFoodTypesController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('proteinTypes')->name('proteinTypes.')->group(function () {
+            Route::get('/', [ProteinTypesController::class, 'index'])->name('index');
+            Route::post('/store', [ProteinTypesController::class, 'store'])->name('store');
+            Route::get('/{proteinType}/edit', [ProteinTypesController::class, 'edit'])->name('edit');
+            Route::patch('/{proteinType}', [ProteinTypesController::class, 'update'])->name('update');
+            Route::delete('/{proteinType}', [ProteinTypesController::class, 'destroy'])->name('destroy');
+        });
 
         Route::prefix('awarenessArticles')->name('awarenessArticles.')->group(function () {
             Route::get('/', [AwarenessArticlesController::class, 'index'])->name('index');
@@ -74,21 +85,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/{city}', [CitiesController::class, 'destroy'])->name('destroy');
         });
 
-        Route::prefix('answersComplains')->name('answersComplains.')->group(function () {
-            Route::get('/', [AnswerComplainsController::class, 'index'])->name('index');
-            Route::get('/create/{answerComplain}', [AnswerComplainsController::class, 'create'])->name('create');
-            Route::post('/{id}', [AnswerComplainsController::class, 'store'])->name('store');
-        });
-
-        Route::prefix('benAnswersComplains')->name('benAnswersComplains.')->group(function () {
-            Route::get('/', [BenAnswerComplainsController::class, 'index'])->name('index');
-            Route::get('/create/{answerComplain}', [BenAnswerComplainsController::class, 'create'])->name('create');
-            Route::post('/{id}', [BenAnswerComplainsController::class, 'store'])->name('store');
-        });
     });
 
     require __DIR__.'/adminAuth.php';
-
+    
 });
 
 

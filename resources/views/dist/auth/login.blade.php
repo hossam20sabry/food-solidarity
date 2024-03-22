@@ -23,7 +23,7 @@
                 <hr class="text-muted">
                 <div class="mb-3">
                     <label for="email" class="form-label" >Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="email" name="email" :value="old('email')" autofocus autocomplete="username" aria-describedby="emailHelp">
                     @error('email')
                     <div class="form-error">
                         <p class="text-danger mb-3">{{$message}}</p>

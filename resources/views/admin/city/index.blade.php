@@ -16,15 +16,6 @@
         </div>
     </div>
     @endif
-    @if ($errors->any())
-    <div class="row">
-        <div class="col-md-12 box_shadow alert alert-danger ">
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </div>
-    </div>
-    @endif
     <div class="row center flex-space-between mx-1">
     
         <div class="col-md-4 box_shadow p-3 my-1">

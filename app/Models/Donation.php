@@ -19,19 +19,18 @@ class Donation extends Model
         return $this->belongsTo(DonationType::class);
     }
 
-    public function foods()
+    public function dryFoods()
     {
-        return $this->hasMany(Canned::class);
+        return $this->hasOne(DryFood::class);
     }
 
-    public function cookedMeals()
+    public function coockedMeals()
     {
-        return $this->hasMany(CookedMeal::class);
+        return $this->hasOne(CoockedMeal::class);
     }
 
-        public function need()
+    public function need()
     {
         return $this->hasOne(Need::class);
     }
-
 }

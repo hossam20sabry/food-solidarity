@@ -54,7 +54,7 @@
                         
                         <h6 class="text-center mt-5 text-muted" id="selectedDryText">No Items Selected</h6>
                         <div id="submitContainer" class="row">
-                            
+                            <!-- Inputs will be appended here -->
                         </div>
                         <button type="submit" id="submitButton" class="btn btn-success w-25 d-none">Submit</button>
                     </form>
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size img_res">
+        <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size">
     </div>
 </div>
 @endsection
@@ -101,7 +101,7 @@
             $('#submitContainer').append('<input type="hidden" name="dry_food_id[]" value="'+id+'">');
             $('#submitContainer').append('<div class="col-12 parent'+id+'"><label for="quantity" class="form-label lapel'+id+'">'+$('.item'+id).text()+' Quantity and Expiry</label></div>');
             $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="number" placeholder="Enter quantity"  data-id="' + id + '" name="quantity[]" min="1" class="form-control mb-1"></div>');
-            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]"   data-id="' + id + '" name="expDate[]"  class="form-control mb-3 date1"></div>');
+            $('#submitContainer').append('<div class="col-5 parent'+id+' mb-1 p-2"><input type="date" id="expDate"  name="expDate[]" min="{{ date('Y-m-d') }}"  data-id="' + id + '" name="expDate[]"  class="form-control mb-3"></div>');
             mainSpinner.classList.add('d-none');
             $('.item'+id).addClass('active');
         }, 500);
@@ -121,6 +121,5 @@
             $('.item'+id).removeClass('active');
         }, 500);
     }
-
 </script>
 @endsection
