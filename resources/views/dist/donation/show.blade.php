@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row min-height d-flex flex-column justify-content-center align-items-center" style="position: relative;">
+            @if($donation->dist->id == Auth::guard('dist')->user()->id)
             <div class="col-md-6">
                 <h3 class="text-success">Donation Details</h3>
                 <table class="table table-light">
@@ -74,7 +75,11 @@
                     @endif
                 </table>
             </div>
-
+            @else
+            <h3 class="text-center">
+                You are not authorized to view this page
+            </h3>
+            @endif
             <img src="{{asset('/home/img/main3.png')}}" alt="..." class="bg-size img_res">
 
         </div>

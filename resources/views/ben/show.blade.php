@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row min-height d-flex justify-content-center align-items-center" style="position: relative;">
+            @if($need->user->id == Auth::user()->id)
             <div class="col-md-6">
                 <h3 class="text-success">Request Details</h3>
                 <table class="table table-light">
@@ -76,6 +77,11 @@
                     @endif
                 </table>
             </div>
+            @else
+            <h3 class="text-center">
+                You are not authorized to view this page
+            </h3>
+            @endif
             {{-- <div class="col-md-6">
                 <h3 class="text-success">Donor location</h3>
 
